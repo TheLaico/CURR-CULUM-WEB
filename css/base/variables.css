@@ -1,0 +1,209 @@
+/* -------------------------------------------------------------
+   1. TIPOGRAFÍA
+      Fuentes, tamaños, pesos, alturas y espaciado entre letras
+------------------------------------------------------------- */
+
+:root {
+  --font-display:  'Sora', sans-serif;
+  --font-body:     'DM Sans', sans-serif;
+  --font-mono:     'JetBrains Mono', monospace;
+
+  --font-size-xs:   0.75rem;   /* 12px */
+  --font-size-sm:   0.875rem;  /* 14px */
+  --font-size-base: 1rem;      /* 16px */
+  --font-size-md:   1.125rem;  /* 18px */
+  --font-size-lg:   1.375rem;  /* 22px */
+  --font-size-xl:   1.75rem;   /* 28px */
+  --font-size-2xl:  2.25rem;   /* 36px */
+  --font-size-3xl:  3rem;      /* 48px */
+  --font-size-4xl:  3.75rem;   /* 60px */
+
+  --font-weight-regular: 400;
+  --font-weight-medium:  500;
+  --font-weight-semibold:600;
+  --font-weight-bold:    700;
+
+  --line-height-tight:  1.2;
+  --line-height-normal: 1.6;
+  --line-height-loose:  1.8;
+
+  --letter-spacing-tight: -0.03em;
+  --letter-spacing-normal: 0em;
+  --letter-spacing-wide:   0.08em;
+  --letter-spacing-wider:  0.15em;
+}
+
+/* -------------------------------------------------------------
+   2. COLORES — Modo claro (por defecto)
+      Paleta: fondo crema cálido + acento verde-azul eléctrico
+------------------------------------------------------------- */
+:root {
+  /* Fondo y superficies */
+  --color-bg:           #F5F2ED;
+  --color-bg-alt:       #EDEAE4;
+  --color-surface:      #FFFFFF;
+  --color-surface-alt:  #F0EDE8;
+
+  /* Texto */
+  --color-text-primary:   #1A1916;
+  --color-text-secondary: #5C5852;
+  --color-text-muted:     #9C9890;
+  --color-text-inverse:   #F5F2ED;
+
+  /* Acento principal — verde-azul eléctrico */
+  --color-accent:         #00C2A8;
+  --color-accent-hover:   #00A891;
+  --color-accent-subtle:  #00C2A814;
+  --color-accent-border:  #00C2A840;
+
+  /* Acento secundario — naranja suave */
+  --color-accent-2:       #FF6B35;
+  --color-accent-2-hover: #E55A27;
+  --color-accent-2-subtle:#FF6B3514;
+
+  /* Bordes y divisores */
+  --color-border:         #D8D4CE;
+  --color-border-subtle:  #E8E4DE;
+  --color-border-strong:  #B0AC A6;
+
+  /* Estados */
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-error:   #EF4444;
+  --color-info:    #3B82F6;
+
+  /* Sombras (valores de color para usar en box-shadow) */
+  --shadow-color:         26 25 22;  /* RGB de --color-text-primary */
+}
+
+/* -------------------------------------------------------------
+   3. COLORES — Modo oscuro
+      Se activa con el atributo [data-theme="dark"] en <html>
+------------------------------------------------------------- */
+[data-theme="dark"] {
+  /* Fondo y superficies */
+  --color-bg:           #0F0E0D;
+  --color-bg-alt:       #181714;
+  --color-surface:      #1E1C1A;
+  --color-surface-alt:  #252320;
+
+  /* Texto */
+  --color-text-primary:   #F0EDE8;
+  --color-text-secondary: #A8A49E;
+  --color-text-muted:     #6B6760;
+  --color-text-inverse:   #0F0E0D;
+
+  /* Acento — igual de vibrante en oscuro */
+  --color-accent:         #00D4B8;
+  --color-accent-hover:   #00EDD0;
+  --color-accent-subtle:  #00D4B812;
+  --color-accent-border:  #00D4B835;
+
+  --color-accent-2:       #FF7A47;
+  --color-accent-2-hover: #FF8F61;
+  --color-accent-2-subtle:#FF7A4712;
+
+  /* Bordes */
+  --color-border:         #2E2C29;
+  --color-border-subtle:  #242220;
+  --color-border-strong:  #3E3C38;
+
+  /* Sombras */
+  --shadow-color:         0 0 0;
+}
+
+/* -------------------------------------------------------------
+   4. ESPACIADO — Escala de 8px
+      Principio: un solo sistema, nunca valores sueltos
+------------------------------------------------------------- */
+:root {
+  --space-1:  0.25rem;   /*  4px */
+  --space-2:  0.5rem;    /*  8px */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1rem;      /* 16px */
+  --space-5:  1.25rem;   /* 20px */
+  --space-6:  1.5rem;    /* 24px */
+  --space-8:  2rem;      /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+  --space-20: 5rem;      /* 80px */
+  --space-24: 6rem;      /* 96px */
+  --space-32: 8rem;      /* 128px */
+}
+
+/* -------------------------------------------------------------
+   5. BORDES Y RADIOS
+------------------------------------------------------------- */
+:root {
+  --radius-sm:   0.25rem;   /*  4px */
+  --radius-md:   0.5rem;    /*  8px */
+  --radius-lg:   0.75rem;   /* 12px */
+  --radius-xl:   1rem;      /* 16px */
+  --radius-2xl:  1.5rem;    /* 24px */
+  --radius-full: 9999px;    /* pastilla / círculo */
+
+  --border-width-thin:   1px;
+  --border-width-normal: 2px;
+  --border-width-thick:  3px;
+}
+
+/* -------------------------------------------------------------
+   6. SOMBRAS — Sistema de elevación
+------------------------------------------------------------- */
+:root {
+  --shadow-xs:  0 1px 2px rgba(var(--shadow-color) / 0.05);
+  --shadow-sm:  0 2px 8px rgba(var(--shadow-color) / 0.08);
+  --shadow-md:  0 4px 16px rgba(var(--shadow-color) / 0.10);
+  --shadow-lg:  0 8px 32px rgba(var(--shadow-color) / 0.12);
+  --shadow-xl:  0 16px 48px rgba(var(--shadow-color) / 0.16);
+  --shadow-accent: 0 8px 32px rgba(0 194 168 / 0.25);
+}
+
+/* -------------------------------------------------------------
+   7. TRANSICIONES Y ANIMACIONES
+------------------------------------------------------------- */
+:root {
+  --transition-fast:   150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow:   400ms ease;
+  --transition-bounce: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --easing-in:     cubic-bezier(0.4, 0, 1, 1);
+  --easing-out:    cubic-bezier(0, 0, 0.2, 1);
+  --easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* -------------------------------------------------------------
+   8. LAYOUT — Contenedores y grid
+------------------------------------------------------------- */
+:root {
+  --container-sm:  640px;
+  --container-md:  768px;
+  --container-lg:  1024px;
+  --container-xl:  1280px;
+  --container-2xl: 1440px;
+
+  --container-padding-x: var(--space-6);  /* padding lateral en móvil */
+
+  --navbar-height: 4rem;   /* 64px — úsalo para offset de scroll */
+  --fab-size:      3.5rem; /* botón flotante WhatsApp */
+}
+
+/* -------------------------------------------------------------
+   9. Z-INDEX — Capas del sistema
+      Nunca uses números mágicos fuera de aquí
+------------------------------------------------------------- */
+:root {
+  --z-below:    -1;
+  --z-base:      0;
+  --z-raised:   10;
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-navbar:   300;
+  --z-overlay:  400;
+  --z-modal:    500;
+  --z-fab:      600;
+  --z-toast:    700;
+}

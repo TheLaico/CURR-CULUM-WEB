@@ -1,0 +1,248 @@
+
+/* -------------------------------------------------------------
+   1. IMPORTAR FUENTES — Google Fonts
+      Pegar este <link> en el <head> de index.html ANTES
+      de cargar cualquier CSS:
+
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+------------------------------------------------------------- */
+
+/* -------------------------------------------------------------
+   2. ESCALA DE HEADINGS — Clases semánticas
+------------------------------------------------------------- */
+.heading-display {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, var(--font-size-4xl));
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-text-primary);
+}
+
+.heading-1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, var(--font-size-3xl));
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-text-primary);
+}
+
+.heading-2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, var(--font-size-2xl));
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-text-primary);
+}
+
+.heading-3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.5vw, var(--font-size-xl));
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+.heading-4 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+/* -------------------------------------------------------------
+   3. BODY TEXT — Párrafos y textos de contenido
+------------------------------------------------------------- */
+.text-lead {
+  font-family: var(--font-body);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-loose);
+  color: var(--color-text-secondary);
+}
+
+.text-body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-secondary);
+}
+
+.text-small {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-muted);
+}
+
+.text-xs {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-muted);
+}
+
+/* -------------------------------------------------------------
+   4. ETIQUETAS Y LABELS — Para badges, tags, categorías
+------------------------------------------------------------- */
+.text-label {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.text-label-accent {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* -------------------------------------------------------------
+   5. CÓDIGO — Inline y bloques
+------------------------------------------------------------- */
+.text-code {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-accent);
+  background-color: var(--color-accent-subtle);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  border: var(--border-width-thin) solid var(--color-accent-border);
+}
+
+/* -------------------------------------------------------------
+   6. MODIFICADORES DE COLOR — Utilitarios semánticos
+------------------------------------------------------------- */
+.text-primary   { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-muted     { color: var(--color-text-muted); }
+.text-accent    { color: var(--color-accent); }
+.text-accent-2  { color: var(--color-accent-2); }
+.text-inverse   { color: var(--color-text-inverse); }
+
+/* -------------------------------------------------------------
+   7. MODIFICADORES DE PESO
+------------------------------------------------------------- */
+.font-regular  { font-weight: var(--font-weight-regular); }
+.font-medium   { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold     { font-weight: var(--font-weight-bold); }
+
+/* -------------------------------------------------------------
+   8. ALINEACIÓN
+------------------------------------------------------------- */
+.text-left   { text-align: left; }
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+
+/* -------------------------------------------------------------
+   9. GRADIENTE EN TEXTO — Para el nombre en el Hero
+      Uso: <h1 class="heading-display text-gradient">Nicolas</h1>
+------------------------------------------------------------- */
+.text-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-text-primary) 0%,
+    var(--color-accent) 60%,
+    var(--color-accent-2) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* -------------------------------------------------------------
+   10. TYPEWRITER — Contenedor del efecto de escritura
+       La lógica JS está en js/utils/typewriter.js
+------------------------------------------------------------- */
+.typewriter-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 3vw, var(--font-size-xl));
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-accent);
+  min-height: 2em;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background-color: var(--color-accent);
+  border-radius: var(--radius-full);
+  animation: cursor-blink 1s step-end infinite;
+  flex-shrink: 0;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* -------------------------------------------------------------
+   11. SECCIÓN TÍTULOS — Patrón reutilizable para h2 de sección
+       Uso: <div class="section-heading"> ... </div>
+------------------------------------------------------------- */
+.section-heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-12);
+}
+
+.section-heading__label {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.section-heading__label::before {
+  content: '';
+  display: inline-block;
+  width: 1.5rem;
+  height: 2px;
+  background-color: var(--color-accent);
+  border-radius: var(--radius-full);
+}
+
+.section-heading__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.5vw, var(--font-size-2xl));
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-text-primary);
+}
+
+.section-heading__subtitle {
+  font-family: var(--font-body);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-loose);
+  color: var(--color-text-secondary);
+  max-width: 55ch;
+}
