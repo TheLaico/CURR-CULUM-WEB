@@ -1,0 +1,100 @@
+
+
+/* -------------------------------------------------------------
+   1. BASE — Ya definido en navbar.css como parte del navbar
+      Aquí extendemos con la animación de cambio de tema
+------------------------------------------------------------- */
+.theme-toggle {
+  position: relative;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-md);
+  border: var(--border-width-thin) solid var(--color-border);
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition:
+    color            var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color     var(--transition-fast),
+    transform        var(--transition-bounce);
+}
+
+.theme-toggle:hover {
+  color: var(--color-accent);
+  background-color: var(--color-accent-subtle);
+  border-color: var(--color-accent-border);
+  transform: rotate(15deg) scale(1.05);
+}
+
+.theme-toggle:active {
+  transform: rotate(15deg) scale(0.95);
+}
+
+/* -------------------------------------------------------------
+   2. ÍCONOS — Transición entre sol y luna
+------------------------------------------------------------- */
+.theme-toggle__icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity   var(--transition-normal) var(--easing-out),
+    transform var(--transition-normal) var(--easing-spring);
+}
+
+/* Modo claro → muestra luna, oculta sol */
+[data-theme="light"] .theme-toggle__icon--sun {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+  pointer-events: none;
+}
+
+[data-theme="light"] .theme-toggle__icon--moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* Modo oscuro → muestra sol, oculta luna */
+[data-theme="dark"] .theme-toggle__icon--moon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+  pointer-events: none;
+}
+
+[data-theme="dark"] .theme-toggle__icon--sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* -------------------------------------------------------------
+   3. RIPPLE DE TRANSICIÓN — Ola que cubre la pantalla
+      al cambiar el tema. El JS agrega .theme-transitioning
+      al <html> durante el cambio
+------------------------------------------------------------- */
+.theme-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  pointer-events: none;
+  background-color: var(--color-bg);
+  opacity: 0;
+  transition: opacity 300ms var(--easing-out);
+}
+
+.theme-transition-overlay.is-active {
+  opacity: 1;
+}
+
+/* Deshabilitar transiciones de toda la página
+   durante el cambio de tema para evitar flashes */
+.theme-transitioning *,
+.theme-transitioning *::before,
+.theme-transitioning *::after {
+  transition-duration: 0ms !important;
+}

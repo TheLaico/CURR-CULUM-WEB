@@ -1,0 +1,173 @@
+
+
+/* -------------------------------------------------------------
+   1. BASE — Botón flotante fijo
+------------------------------------------------------------- */
+.whatsapp-fab {
+  position: fixed;
+  bottom: var(--space-8);
+  right: var(--space-8);
+  z-index: var(--z-fab);
+
+  /* Tamaño */
+  width: var(--fab-size);
+  height: var(--fab-size);
+  border-radius: var(--radius-full);
+
+  /* Color WhatsApp */
+  background-color: #25D366;
+  color: #FFFFFF;
+
+  /* Layout interno */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Sombra */
+  box-shadow:
+    0 4px 12px rgba(37, 211, 102, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+
+  /* Transiciones */
+  transition:
+    transform        var(--transition-bounce),
+    box-shadow       var(--transition-normal) var(--easing-out),
+    background-color var(--transition-fast);
+
+  /* Entrada animada */
+  animation:
+    scale-up 0.5s var(--easing-spring) 1.5s both,
+    pulse-fab 3s var(--easing-smooth) 2s infinite;
+
+  /* Accesibilidad */
+  text-decoration: none;
+  outline: none;
+}
+
+.whatsapp-fab:hover {
+  background-color: #20BD5A;
+  transform: scale(1.1) translateY(-3px);
+  box-shadow:
+    0 8px 24px rgba(37, 211, 102, 0.5),
+    0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.whatsapp-fab:active {
+  transform: scale(0.95);
+}
+
+.whatsapp-fab:focus-visible {
+  outline: var(--border-width-normal) solid #25D366;
+  outline-offset: 3px;
+}
+
+/* -------------------------------------------------------------
+   2. ÍCONO SVG
+------------------------------------------------------------- */
+.whatsapp-fab svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  flex-shrink: 0;
+  transition: transform var(--transition-bounce);
+  fill: #FFFFFF;
+}
+
+.whatsapp-fab:hover svg {
+  transform: scale(1.1) rotate(-8deg);
+}
+
+/* -------------------------------------------------------------
+   3. TOOLTIP — Aparece al hacer hover
+------------------------------------------------------------- */
+.whatsapp-fab::before {
+  content: 'Escríbeme';
+  position: absolute;
+  right: calc(100% + var(--space-3));
+  top: 50%;
+  transform: translateY(-50%) translateX(var(--space-2));
+  background-color: var(--color-text-primary);
+  color: var(--color-bg);
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity   var(--transition-normal) var(--easing-out),
+    transform var(--transition-normal) var(--easing-spring);
+  box-shadow: var(--shadow-md);
+}
+
+/* Flechita del tooltip */
+.whatsapp-fab::after {
+  content: '';
+  position: absolute;
+  right: calc(100% + var(--space-1));
+  top: 50%;
+  transform: translateY(-50%) translateX(var(--space-2));
+  border: 5px solid transparent;
+  border-left-color: var(--color-text-primary);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity   var(--transition-normal) var(--easing-out),
+    transform var(--transition-normal) var(--easing-spring);
+}
+
+.whatsapp-fab:hover::before {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+.whatsapp-fab:hover::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* -------------------------------------------------------------
+   4. PULSO DE ATENCIÓN — Aro verde que se expande
+------------------------------------------------------------- */
+@keyframes pulse-fab {
+  0%   { box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4), 0 0 0 0 rgba(37, 211, 102, 0.4); }
+  50%  { box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4), 0 0 0 10px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4), 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* -------------------------------------------------------------
+   5. VISIBILIDAD — El JS agrega .is-hidden cuando
+      el usuario está en la sección de contacto
+      (ya hay suficientes formas de contacto visibles)
+------------------------------------------------------------- */
+.whatsapp-fab.is-hidden {
+  opacity: 0;
+  transform: scale(0.8) translateY(var(--space-4));
+  pointer-events: none;
+}
+
+/* -------------------------------------------------------------
+   6. MODO OSCURO — Ajuste sutil de sombra
+------------------------------------------------------------- */
+[data-theme="dark"] .whatsapp-fab {
+  box-shadow:
+    0 4px 12px rgba(37, 211, 102, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .whatsapp-fab:hover {
+  box-shadow:
+    0 8px 24px rgba(37, 211, 102, 0.4),
+    0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .whatsapp-fab::before {
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  border: var(--border-width-thin) solid var(--color-border);
+}
+
+[data-theme="dark"] .whatsapp-fab::after {
+  border-left-color: var(--color-surface);
+}
