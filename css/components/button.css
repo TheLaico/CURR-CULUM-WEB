@@ -1,0 +1,340 @@
+
+
+/* -------------------------------------------------------------
+   1. BASE — Estilos compartidos por TODOS los botones
+      Principio OCP: esta base nunca se modifica,
+      solo se extiende con modificadores .btn--*
+------------------------------------------------------------- */
+.btn {
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+
+  /* Tamaño por defecto (md) */
+  height: 2.75rem;
+  padding-inline: var(--space-6);
+  min-width: 140px;
+
+  /* Tipografía */
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 1;
+
+  /* Forma */
+  border-radius: var(--radius-md);
+  border: var(--border-width-normal) solid transparent;
+
+  /* Comportamiento */
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  /* Transición base */
+  transition:
+    color            var(--transition-normal) var(--easing-out),
+    background-color var(--transition-normal) var(--easing-out),
+    border-color     var(--transition-normal) var(--easing-out),
+    box-shadow       var(--transition-normal) var(--easing-out),
+    transform        var(--transition-bounce);
+}
+
+/* Efecto ripple al hacer clic */
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.12);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  border-radius: inherit;
+}
+
+.btn:active::before {
+  opacity: 1;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* Focus visible accesible */
+.btn:focus-visible {
+  outline: var(--border-width-normal) solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Ícono SVG dentro del botón */
+.btn svg {
+  flex-shrink: 0;
+  transition: transform var(--transition-normal) var(--easing-spring);
+}
+
+/* -------------------------------------------------------------
+   2. VARIANTES DE COLOR
+------------------------------------------------------------- */
+
+/* — PRIMARY — Fondo acento sólido */
+.btn--primary {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #0F0E0D;
+}
+
+.btn--primary:hover {
+  background-color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  box-shadow: var(--shadow-accent);
+  transform: translateY(-2px);
+}
+
+.btn--primary:hover svg {
+  transform: translateX(3px);
+}
+
+/* — SECONDARY — Borde acento, fondo sutil */
+.btn--secondary {
+  background-color: var(--color-accent-subtle);
+  border-color: var(--color-accent-border);
+  color: var(--color-accent);
+}
+
+.btn--secondary:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #0F0E0D;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-accent);
+}
+
+.btn--secondary:hover svg {
+  transform: translateY(-2px);
+}
+
+/* — GHOST — Sin fondo, solo texto */
+.btn--ghost {
+  background-color: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.btn--ghost:hover {
+  background-color: var(--color-surface-alt);
+  border-color: var(--color-border-strong);
+  color: var(--color-text-primary);
+  transform: translateY(-2px);
+}
+
+/* — ACCENT-2 — Naranja para CTAs secundarios */
+.btn--accent-2 {
+  background-color: var(--color-accent-2);
+  border-color: var(--color-accent-2);
+  color: #FFFFFF;
+}
+
+.btn--accent-2:hover {
+  background-color: var(--color-accent-2-hover);
+  border-color: var(--color-accent-2-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3);
+}
+
+/* — DARK — Para usar sobre fondos claros del hero */
+.btn--dark {
+  background-color: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+  color: var(--color-bg);
+}
+
+.btn--dark:hover {
+  background-color: var(--color-text-secondary);
+  border-color: var(--color-text-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* — OUTLINE — Solo borde de texto, sin relleno */
+.btn--outline {
+  background-color: transparent;
+  border-color: var(--color-text-primary);
+  color: var(--color-text-primary);
+}
+
+.btn--outline:hover {
+  background-color: var(--color-text-primary);
+  color: var(--color-bg);
+  transform: translateY(-2px);
+}
+
+/* -------------------------------------------------------------
+   3. VARIANTES DE TAMAÑO
+------------------------------------------------------------- */
+
+/* Pequeño */
+.btn--sm {
+  height: 2rem;
+  padding-inline: var(--space-4);
+  font-size: var(--font-size-xs);
+  min-width: 0;
+  border-radius: var(--radius-md);
+}
+
+/* Grande */
+.btn--lg {
+  height: 3.25rem;
+  padding-inline: var(--space-8);
+  font-size: var(--font-size-base);
+  min-width: 180px;
+  border-radius: var(--radius-lg);
+}
+
+/* Ancho completo */
+.btn--full {
+  width: 100%;
+}
+
+/* Cuadrado / Ícono solo */
+.btn--icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  min-width: 0;
+  border-radius: var(--radius-md);
+}
+
+.btn--icon.btn--sm {
+  width: 2rem;
+  height: 2rem;
+}
+
+.btn--icon.btn--lg {
+  width: 3.25rem;
+  height: 3.25rem;
+}
+
+/* Pastilla / Pill */
+.btn--pill {
+  border-radius: var(--radius-full);
+  padding-inline: var(--space-8);
+}
+
+/* -------------------------------------------------------------
+   4. ESTADOS
+------------------------------------------------------------- */
+
+/* Deshabilitado */
+.btn:disabled,
+.btn--disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Cargando */
+.btn--loading {
+  cursor: wait;
+  pointer-events: none;
+  color: transparent;
+}
+
+.btn--loading::after {
+  content: '';
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: var(--radius-full);
+  animation: spin 0.7s linear infinite;
+  color: inherit;
+}
+
+.btn--primary.btn--loading::after   { color: #0F0E0D; }
+.btn--secondary.btn--loading::after { color: var(--color-accent); }
+.btn--ghost.btn--loading::after     { color: var(--color-text-secondary); }
+
+/* -------------------------------------------------------------
+   5. GRUPO DE BOTONES
+      Uso: <div class="btn-group">
+             <button class="btn btn--ghost">A</button>
+             <button class="btn btn--ghost">B</button>
+           </div>
+------------------------------------------------------------- */
+.btn-group {
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-group .btn {
+  border-radius: 0;
+  border-right-width: 0;
+}
+
+.btn-group .btn:first-child {
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+}
+
+.btn-group .btn:last-child {
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border-right-width: var(--border-width-normal);
+}
+
+.btn-group .btn:hover {
+  z-index: var(--z-raised);
+  transform: none;
+}
+
+/* -------------------------------------------------------------
+   6. BOTONES ESPECÍFICOS DEL PORTFOLIO
+------------------------------------------------------------- */
+
+/* Botón de proyecto — demo */
+.btn--demo {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #0F0E0D;
+  height: 2.25rem;
+  padding-inline: var(--space-5);
+  font-size: var(--font-size-xs);
+  min-width: 0;
+  border-radius: var(--radius-md);
+}
+
+.btn--demo:hover {
+  background-color: var(--color-accent-hover);
+  box-shadow: var(--shadow-accent);
+  transform: translateY(-2px);
+}
+
+/* Botón de proyecto — GitHub */
+.btn--github {
+  background-color: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
+  height: 2.25rem;
+  padding-inline: var(--space-5);
+  font-size: var(--font-size-xs);
+  min-width: 0;
+  border-radius: var(--radius-md);
+}
+
+.btn--github:hover {
+  border-color: var(--color-text-primary);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-alt);
+  transform: translateY(-2px);
+}
+
+.btn--github:hover svg {
+  transform: rotate(-8deg) scale(1.1);
+}

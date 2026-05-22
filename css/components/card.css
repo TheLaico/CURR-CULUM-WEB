@@ -1,0 +1,440 @@
+
+/* -------------------------------------------------------------
+   1. BASE — Estilos compartidos por TODAS las tarjetas
+------------------------------------------------------------- */
+.card {
+  background-color: var(--color-surface);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color  var(--transition-normal) var(--easing-out),
+    box-shadow    var(--transition-normal) var(--easing-out),
+    transform     var(--transition-bounce);
+}
+
+.card:hover {
+  border-color: var(--color-accent-border);
+  box-shadow: var(--shadow-md);
+}
+
+/* Línea acento superior al hacer hover */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-accent-2)
+  );
+  opacity: 0;
+  transition: opacity var(--transition-normal) var(--easing-out);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* -------------------------------------------------------------
+   2. CONTACT CARD — Tarjetas de contacto rápido
+------------------------------------------------------------- */
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  background-color: var(--color-surface);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color  var(--transition-normal) var(--easing-out),
+    box-shadow    var(--transition-normal) var(--easing-out),
+    transform     var(--transition-bounce),
+    background-color var(--transition-normal) var(--easing-out);
+}
+
+.contact-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+  opacity: 0;
+  transition: opacity var(--transition-normal) var(--easing-out);
+}
+
+.contact-card:hover {
+  border-color: var(--color-accent-border);
+  box-shadow: var(--shadow-md);
+  background-color: var(--color-surface-alt);
+  transform: translateY(-4px);
+}
+
+.contact-card:hover::before {
+  opacity: 1;
+}
+
+.contact-card__icon {
+  font-size: 2rem;
+  line-height: 1;
+  display: block;
+  transition: transform var(--transition-bounce);
+}
+
+.contact-card:hover .contact-card__icon {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+.contact-card__label {
+  font-family: var(--font-display);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  line-height: 1;
+}
+
+.contact-card__value {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  line-height: 1;
+}
+
+/* Grid del contacto rápido */
+.contact-quick__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  max-width: var(--container-lg);
+  margin-inline: auto;
+}
+
+/* -------------------------------------------------------------
+   3. TECH CARD — Tarjetas de tecnologías
+------------------------------------------------------------- */
+.tech-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  background-color: var(--color-surface);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color     var(--transition-normal) var(--easing-out),
+    box-shadow       var(--transition-normal) var(--easing-out),
+    transform        var(--transition-bounce),
+    background-color var(--transition-normal) var(--easing-out);
+}
+
+.tech-card:hover {
+  border-color: var(--color-accent-border);
+  box-shadow: var(--shadow-md);
+  background-color: var(--color-surface-alt);
+  transform: translateY(-4px) scale(1.02);
+}
+
+/* Brillo de fondo al hacer hover */
+.tech-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 0%,
+    var(--color-accent-subtle) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-normal) var(--easing-out);
+  pointer-events: none;
+}
+
+.tech-card:hover::after {
+  opacity: 1;
+}
+
+.tech-card__icon {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.25rem;
+  line-height: 1;
+  position: relative;
+  z-index: var(--z-raised);
+  transition: transform var(--transition-bounce);
+}
+
+.tech-card:hover .tech-card__icon {
+  transform: scale(1.2) translateY(-2px);
+}
+
+.tech-card__name {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  line-height: 1;
+  position: relative;
+  z-index: var(--z-raised);
+}
+
+.tech-card__level {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-accent);
+  line-height: 1;
+  position: relative;
+  z-index: var(--z-raised);
+}
+
+/* Grid de tecnologías */
+.technologies__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-10);
+}
+
+/* Sección "actualmente aprendiendo" */
+.technologies__learning {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  background-color: var(--color-surface);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-xl);
+  border-left: 3px solid var(--color-accent);
+}
+
+.technologies__learning-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* -------------------------------------------------------------
+   4. PROJECT CARD — Tarjetas de proyectos (horizontal)
+------------------------------------------------------------- */
+.project-card {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--color-surface);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  position: relative;
+  transition:
+    border-color var(--transition-normal) var(--easing-out),
+    box-shadow   var(--transition-normal) var(--easing-out),
+    transform    var(--transition-bounce);
+}
+
+.project-card:hover {
+  border-color: var(--color-accent-border);
+  box-shadow: var(--shadow-xl);
+  transform: translateY(-4px);
+}
+
+/* Línea acento izquierda */
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(
+    180deg,
+    var(--color-accent),
+    var(--color-accent-2)
+  );
+  opacity: 0;
+  transition: opacity var(--transition-normal) var(--easing-out);
+  border-radius: var(--radius-2xl) 0 0 var(--radius-2xl);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+/* Imagen del proyecto */
+.project-card__image {
+  width: 280px;
+  min-width: 280px;
+  height: 100%;
+  min-height: 220px;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform var(--transition-slow) var(--easing-out);
+  flex-shrink: 0;
+}
+
+.project-card:hover .project-card__image {
+  transform: scale(1.04);
+}
+
+/* Placeholder cuando no hay imagen */
+.project-card__image-placeholder {
+  width: 280px;
+  min-width: 280px;
+  min-height: 220px;
+  background: linear-gradient(
+    135deg,
+    var(--color-surface-alt) 0%,
+    var(--color-accent-subtle) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  flex-shrink: 0;
+}
+
+/* Cuerpo de la tarjeta */
+.project-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-8);
+  flex: 1;
+  min-width: 0;
+}
+
+/* Número de proyecto decorativo */
+.project-card__number {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+  letter-spacing: var(--letter-spacing-wider);
+}
+
+.project-card__title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  transition: color var(--transition-fast);
+}
+
+.project-card:hover .project-card__title {
+  color: var(--color-accent);
+}
+
+.project-card__description {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Stack de tecnologías del proyecto */
+.project-card__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* Botones de acción */
+.project-card__buttons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: auto;
+}
+
+/* Grid de proyectos */
+.projects__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* -------------------------------------------------------------
+   5. STAT CARD — Tarjetas de estadísticas (Sobre mí)
+------------------------------------------------------------- */
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: var(--space-6);
+  background-color: var(--color-surface);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-xl);
+  text-align: center;
+  transition:
+    border-color var(--transition-normal) var(--easing-out),
+    transform    var(--transition-bounce);
+}
+
+.stat-card:hover {
+  border-color: var(--color-accent-border);
+  transform: translateY(-3px);
+}
+
+.stat-card__number {
+  font-family: var(--font-display);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+  line-height: 1;
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.stat-card__suffix {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+  line-height: 1;
+  margin-top: -1.5rem;
+  align-self: flex-start;
+}
+
+.stat-card__label {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
+
+/* Grid de stats */
+.about__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}

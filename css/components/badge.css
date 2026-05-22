@@ -1,0 +1,294 @@
+
+/* -------------------------------------------------------------
+   1. BASE — Estilos compartidos por TODOS los badges
+------------------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+
+  /* Tipografía */
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wide);
+  line-height: 1;
+  white-space: nowrap;
+
+  /* Forma */
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  border: var(--border-width-thin) solid transparent;
+
+  /* Comportamiento */
+  flex-shrink: 0;
+  user-select: none;
+  transition:
+    color            var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color     var(--transition-fast),
+    transform        var(--transition-bounce);
+}
+
+/* -------------------------------------------------------------
+   2. VARIANTES DE COLOR
+------------------------------------------------------------- */
+
+/* — DEFAULT — Gris neutro */
+.badge--default {
+  background-color: var(--color-surface-alt);
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+/* — ACCENT — Verde-azul principal */
+.badge--accent {
+  background-color: var(--color-accent-subtle);
+  border-color: var(--color-accent-border);
+  color: var(--color-accent);
+}
+
+/* — ACCENT-2 — Naranja secundario */
+.badge--accent-2 {
+  background-color: var(--color-accent-2-subtle);
+  border-color: rgba(255, 107, 53, 0.25);
+  color: var(--color-accent-2);
+}
+
+/* — SOLID — Fondo sólido acento */
+.badge--solid {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #0F0E0D;
+}
+
+/* — OUTLINE — Solo borde */
+.badge--outline {
+  background-color: transparent;
+  border-color: var(--color-border-strong);
+  color: var(--color-text-secondary);
+}
+
+/* — SUCCESS */
+.badge--success {
+  background-color: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.3);
+  color: var(--color-success);
+}
+
+/* — WARNING */
+.badge--warning {
+  background-color: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: var(--color-warning);
+}
+
+/* — ERROR */
+.badge--error {
+  background-color: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: var(--color-error);
+}
+
+/* -------------------------------------------------------------
+   3. VARIANTES SEMÁNTICAS DEL PORTFOLIO
+------------------------------------------------------------- */
+
+/* — TECH — Para stack de tecnologías en Hero y Project card */
+.badge--tech {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  padding: var(--space-2) var(--space-3);
+  transition:
+    color            var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color     var(--transition-fast),
+    transform        var(--transition-bounce);
+}
+
+.badge--tech:hover {
+  background-color: var(--color-accent-subtle);
+  border-color: var(--color-accent-border);
+  color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+/* — LEARNING — Para "Actualmente aprendiendo" */
+.badge--learning {
+  background-color: var(--color-accent-subtle);
+  border-color: var(--color-accent-border);
+  color: var(--color-accent);
+  font-size: var(--font-size-sm);
+  padding: var(--space-2) var(--space-4);
+  font-weight: var(--font-weight-medium);
+  gap: var(--space-2);
+  animation: pulse-glow 3s var(--easing-smooth) infinite;
+}
+
+/* — COURSE — Para cursos en la sección educación */
+.badge--course {
+  background-color: var(--color-surface-alt);
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  padding: var(--space-2) var(--space-3);
+  transition:
+    color            var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color     var(--transition-fast);
+}
+
+.badge--course:hover {
+  background-color: var(--color-accent-subtle);
+  border-color: var(--color-accent-border);
+  color: var(--color-accent);
+}
+
+/* — PERIOD — Para semestre/año en educación */
+.badge--period {
+  background-color: var(--color-accent-subtle);
+  border-color: var(--color-accent-border);
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  padding: var(--space-2) var(--space-4);
+  flex-shrink: 0;
+}
+
+/* — AVAILABLE — Para disponibilidad laboral */
+.badge--available {
+  background-color: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.3);
+  color: var(--color-success);
+  padding: var(--space-2) var(--space-4);
+  gap: var(--space-2);
+}
+
+.badge--available::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-success);
+  flex-shrink: 0;
+  animation: pulse-glow 2s var(--easing-smooth) infinite;
+}
+
+/* -------------------------------------------------------------
+   4. VARIANTES DE TAMAÑO
+------------------------------------------------------------- */
+
+/* Pequeño */
+.badge--sm {
+  font-size: 0.65rem;
+  padding: 2px var(--space-2);
+  letter-spacing: var(--letter-spacing-wider);
+}
+
+/* Grande */
+.badge--lg {
+  font-size: var(--font-size-sm);
+  padding: var(--space-2) var(--space-5);
+}
+
+/* -------------------------------------------------------------
+   5. BADGE CON PUNTO DE ESTADO (dot)
+      Uso: <span class="badge badge--accent badge--dot">Online</span>
+------------------------------------------------------------- */
+.badge--dot {
+  gap: var(--space-2);
+}
+
+.badge--dot::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: currentColor;
+  flex-shrink: 0;
+}
+
+/* -------------------------------------------------------------
+   6. BADGE CONTADOR — Para notificaciones
+      Uso: <span class="badge-count">3</span>
+------------------------------------------------------------- */
+.badge-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding-inline: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent);
+  color: #0F0E0D;
+  flex-shrink: 0;
+}
+
+/* -------------------------------------------------------------
+   7. HERO BADGE FLOTANTE — El "Disponible" sobre la foto
+------------------------------------------------------------- */
+.hero__badge {
+  position: absolute;
+  bottom: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  background-color: var(--color-surface);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hero__badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-success);
+  flex-shrink: 0;
+  animation: pulse-glow 2s var(--easing-smooth) infinite;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+}
+
+/* -------------------------------------------------------------
+   8. GRUPOS DE BADGES — Contenedor con wrap
+------------------------------------------------------------- */
+.badge-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+/* Badges apilados con overlap */
+.badge-stack {
+  display: flex;
+  align-items: center;
+}
+
+.badge-stack .badge {
+  margin-left: -var(--space-2);
+  border: var(--border-width-normal) solid var(--color-bg);
+}
+
+.badge-stack .badge:first-child {
+  margin-left: 0;
+}
