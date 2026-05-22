@@ -1,0 +1,373 @@
+
+/* -------------------------------------------------------------
+   1. SECCIÓN BASE
+------------------------------------------------------------- */
+.about {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fondo decorativo — círculo grande difuso */
+.about::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: -200px;
+  width: 600px;
+  height: 600px;
+  border-radius: var(--radius-full);
+  background: radial-gradient(
+    circle,
+    var(--color-accent-subtle) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: var(--z-below);
+}
+
+.about::after {
+  content: '';
+  position: absolute;
+  bottom: -150px;
+  right: -150px;
+  width: 500px;
+  height: 500px;
+  border-radius: var(--radius-full);
+  background: radial-gradient(
+    circle,
+    var(--color-accent-2-subtle) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: var(--z-below);
+}
+
+/* -------------------------------------------------------------
+   2. LAYOUT — Dos columnas: texto + stats
+------------------------------------------------------------- */
+.about__container {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-20);
+  position: relative;
+  z-index: var(--z-base);
+}
+
+/* -------------------------------------------------------------
+   3. COLUMNA DE TEXTO
+------------------------------------------------------------- */
+.about__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  max-width: 55ch;
+}
+
+/* Párrafos con separador sutil entre ellos */
+.about__text p + p {
+  padding-top: var(--space-5);
+  border-top: var(--border-width-thin) solid var(--color-border-subtle);
+}
+
+/* Quote decorativo — frase personal */
+.about__quote {
+  position: relative;
+  padding: var(--space-5) var(--space-6);
+  background-color: var(--color-surface);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  margin-top: var(--space-4);
+}
+
+.about__quote-text {
+  font-family: var(--font-display);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-normal);
+  font-style: italic;
+}
+
+/* Comilla decorativa */
+.about__quote::before {
+  content: '"';
+  position: absolute;
+  top: -var(--space-4);
+  left: var(--space-4);
+  font-family: var(--font-display);
+  font-size: 4rem;
+  color: var(--color-accent);
+  opacity: 0.3;
+  line-height: 1;
+  top: -0.5rem;
+}
+
+/* Chips de intereses personales */
+.about__interests {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.about__interest-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-surface);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  transition:
+    border-color var(--transition-fast),
+    color        var(--transition-fast),
+    transform    var(--transition-bounce);
+}
+
+.about__interest-chip:hover {
+  border-color: var(--color-accent-border);
+  color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.about__interest-chip-icon {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+/* -------------------------------------------------------------
+   4. COLUMNA DE STATS
+------------------------------------------------------------- */
+.about__right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  flex-shrink: 0;
+  width: 320px;
+}
+
+/* Grid de stat-cards */
+.about__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+/* -------------------------------------------------------------
+   5. CARD DE PERFIL — Bloque con foto pequeña y datos
+------------------------------------------------------------- */
+.about__profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-8);
+  background-color: var(--color-surface);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fondo degradado sutil */
+.about__profile-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(
+    180deg,
+    var(--color-accent-subtle),
+    transparent
+  );
+  pointer-events: none;
+}
+
+.about__profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  object-position: center top;
+  border: 3px solid var(--color-accent-border);
+  position: relative;
+  z-index: var(--z-raised);
+  box-shadow: var(--shadow-md);
+}
+
+.about__profile-name {
+  font-family: var(--font-display);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+}
+
+.about__profile-role {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-accent);
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.about__profile-location {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* Separador */
+.about__profile-divider {
+  width: 100%;
+  height: var(--border-width-thin);
+  background-color: var(--color-border-subtle);
+}
+
+/* Lista de datos rápidos */
+.about__profile-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  text-align: left;
+}
+
+.about__profile-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.about__profile-item-label {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.about__profile-item-value {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+/* -------------------------------------------------------------
+   6. STAT COUNTER ANIMATION
+      El JS observa .stat-card y anima data-count
+      cuando entra al viewport
+------------------------------------------------------------- */
+.stat-card__number {
+  transition: color var(--transition-normal) var(--easing-out);
+}
+
+.stat-card.is-counting .stat-card__number {
+  color: var(--color-accent);
+  animation: count-up 0.4s var(--easing-spring) both;
+}
+
+/* -------------------------------------------------------------
+   7. TIMELINE MINI — Línea de tiempo compacta
+      Para mostrar experiencia o hitos dentro de about
+------------------------------------------------------------- */
+.about__timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: var(--space-4);
+}
+
+.about__timeline-item {
+  display: flex;
+  gap: var(--space-4);
+  position: relative;
+  padding-bottom: var(--space-6);
+}
+
+.about__timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+/* Línea vertical */
+.about__timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 16px;
+  bottom: 0;
+  width: var(--border-width-thin);
+  background: linear-gradient(
+    180deg,
+    var(--color-accent-border),
+    transparent
+  );
+}
+
+.about__timeline-item:last-child::before {
+  display: none;
+}
+
+/* Punto */
+.about__timeline-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-full);
+  border: var(--border-width-normal) solid var(--color-accent);
+  background-color: var(--color-bg);
+  flex-shrink: 0;
+  position: relative;
+  z-index: var(--z-raised);
+  margin-top: 2px;
+  transition: background-color var(--transition-fast);
+}
+
+.about__timeline-item:hover .about__timeline-dot {
+  background-color: var(--color-accent);
+}
+
+.about__timeline-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.about__timeline-title {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+}
+
+.about__timeline-period {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
+
+/* -------------------------------------------------------------
+   8. MODO OSCURO
+------------------------------------------------------------- */
+[data-theme="dark"] .about::before,
+[data-theme="dark"] .about::after {
+  opacity: 0.4;
+}
+
+[data-theme="dark"] .about__profile-card::before {
+  opacity: 0.5;
+}

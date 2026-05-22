@@ -1,0 +1,360 @@
+
+
+/* -------------------------------------------------------------
+   1. SECCIÓN BASE
+------------------------------------------------------------- */
+.footer {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-bg);
+  border-top: var(--border-width-thin) solid var(--color-border);
+  padding-block: var(--space-12);
+}
+
+/* Fondo decorativo — gradiente sutil */
+.footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 60% 80% at 0% 100%,
+      var(--color-accent-subtle) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 40% 60% at 100% 0%,
+      var(--color-accent-2-subtle) 0%,
+      transparent 70%
+    );
+  pointer-events: none;
+  z-index: var(--z-below);
+}
+
+/* -------------------------------------------------------------
+   2. CONTAINER PRINCIPAL
+------------------------------------------------------------- */
+.footer__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  position: relative;
+  z-index: var(--z-base);
+}
+
+/* -------------------------------------------------------------
+   3. LADO IZQUIERDO — Disponibilidad + ubicación
+------------------------------------------------------------- */
+.footer__left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Banner de disponibilidad */
+.footer__available {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-success);
+}
+
+/* Punto verde pulsante */
+.footer__available-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-success);
+  flex-shrink: 0;
+  animation: pulse-glow 2s var(--easing-smooth) infinite;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
+}
+
+/* Ubicación */
+.footer__location {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.footer__location-icon {
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+/* -------------------------------------------------------------
+   4. CENTRO — Logo y nombre (opcional)
+------------------------------------------------------------- */
+.footer__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.footer__logo {
+  font-family: var(--font-display);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.footer__logo:hover {
+  color: var(--color-accent);
+}
+
+.footer__logo-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.footer__tagline {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  letter-spacing: var(--letter-spacing-wide);
+  text-align: center;
+}
+
+/* -------------------------------------------------------------
+   5. LADO DERECHO — Redes sociales + copyright
+------------------------------------------------------------- */
+.footer__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+
+/* Links de redes sociales */
+.footer__socials {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition:
+    color            var(--transition-fast),
+    border-color     var(--transition-fast),
+    background-color var(--transition-fast),
+    transform        var(--transition-bounce);
+}
+
+.footer__social-link:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent-border);
+  background-color: var(--color-accent-subtle);
+  transform: translateY(-2px);
+}
+
+/* Ícono SVG dentro del link social */
+.footer__social-link svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  transition: transform var(--transition-bounce);
+}
+
+.footer__social-link:hover svg {
+  transform: scale(1.2) rotate(-5deg);
+}
+
+/* Copyright */
+.footer__copy {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-align: right;
+}
+
+/* -------------------------------------------------------------
+   6. DIVISOR SUPERIOR — Separador decorativo
+------------------------------------------------------------- */
+.footer__divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-10);
+  position: relative;
+  z-index: var(--z-base);
+}
+
+.footer__divider::before,
+.footer__divider::after {
+  content: '';
+  flex: 1;
+  height: var(--border-width-thin);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-border),
+    transparent
+  );
+}
+
+.footer__divider-icon {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  opacity: 0.5;
+}
+
+/* -------------------------------------------------------------
+   7. FRANJA DE CRÉDITOS — Debajo del container principal
+------------------------------------------------------------- */
+.footer__credits {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: var(--border-width-thin) solid var(--color-border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  position: relative;
+  z-index: var(--z-base);
+}
+
+.footer__credits-text {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Corazón animado */
+.footer__credits-heart {
+  color: var(--color-accent-2);
+  display: inline-block;
+  animation: heartbeat 1.5s var(--easing-smooth) infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15%       { transform: scale(1.25); }
+  30%       { transform: scale(1); }
+  45%       { transform: scale(1.15); }
+}
+
+/* Stack tech en créditos */
+.footer__credits-stack {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.footer__credits-tech {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-accent);
+  font-weight: var(--font-weight-semibold);
+}
+
+.footer__credits-sep {
+  color: var(--color-border-strong);
+}
+
+/* -------------------------------------------------------------
+   8. BACK TO TOP — Botón para volver al inicio
+------------------------------------------------------------- */
+.back-to-top {
+  position: fixed;
+  bottom: calc(var(--fab-size) + var(--space-8) + var(--space-4));
+  right: var(--space-8);
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-surface);
+  border: var(--border-width-thin) solid var(--color-border);
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: var(--z-fab);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transform: translateY(var(--space-4));
+  pointer-events: none;
+  transition:
+    opacity    var(--transition-normal) var(--easing-out),
+    transform  var(--transition-normal) var(--easing-out),
+    color      var(--transition-fast),
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+/* El JS agrega .is-visible cuando scrollY > 400 */
+.back-to-top.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.back-to-top:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent-border);
+  background-color: var(--color-accent-subtle);
+  transform: translateY(-3px);
+}
+
+.back-to-top:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.back-to-top svg {
+  width: 1rem;
+  height: 1rem;
+  transition: transform var(--transition-bounce);
+}
+
+.back-to-top:hover svg {
+  transform: translateY(-2px);
+}
+
+/* -------------------------------------------------------------
+   9. MODO OSCURO
+------------------------------------------------------------- */
+[data-theme="dark"] .footer {
+  background-color: var(--color-bg);
+  border-top-color: var(--color-border);
+}
+
+[data-theme="dark"] .footer::before {
+  opacity: 0.4;
+}
+
+[data-theme="dark"] .back-to-top {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}

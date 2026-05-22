@@ -1,0 +1,417 @@
+
+
+/* -------------------------------------------------------------
+   1. SECCIÓN BASE
+------------------------------------------------------------- */
+.education {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fondo decorativo — líneas diagonales sutiles */
+.education::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 40px,
+    var(--color-border-subtle) 40px,
+    var(--color-border-subtle) 41px
+  );
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: var(--z-below);
+  mask-image: radial-gradient(
+    ellipse 80% 80% at 50% 50%,
+    black 0%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 80% 80% at 50% 50%,
+    black 0%,
+    transparent 100%
+  );
+}
+
+[data-theme="dark"] .education::before {
+  opacity: 0.1;
+}
+
+/* -------------------------------------------------------------
+   2. TIMELINE — Contenedor principal
+------------------------------------------------------------- */
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: var(--container-md);
+  margin-inline: auto;
+}
+
+/* -------------------------------------------------------------
+   3. LÍNEA VERTICAL — La línea del tiempo
+------------------------------------------------------------- */
+.timeline__line {
+  position: absolute;
+  left: 1.75rem;
+  top: 0;
+  bottom: 0;
+  width: var(--border-width-normal);
+  background: linear-gradient(
+    180deg,
+    var(--color-accent) 0%,
+    var(--color-accent-2) 50%,
+    transparent 100%
+  );
+  border-radius: var(--radius-full);
+  z-index: var(--z-base);
+}
+
+/* Efecto de progreso animado en la línea */
+.timeline__line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-subtle);
+  animation: float 2s var(--easing-smooth) infinite;
+}
+
+/* -------------------------------------------------------------
+   4. ITEM DEL TIMELINE
+------------------------------------------------------------- */
+.timeline__item {
+  position: relative;
+  padding-left: calc(1.75rem + var(--space-10));
+  padding-bottom: var(--space-10);
+}
+
+.timeline__item:last-child {
+  padding-bottom: 0;
+}
+
+/* -------------------------------------------------------------
+   5. PUNTO DEL TIMELINE
+------------------------------------------------------------- */
+.timeline__dot {
+  position: absolute;
+  left: 0;
+  top: var(--space-1);
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg);
+  border: var(--border-width-normal) solid var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-raised);
+  transition:
+    background-color var(--transition-normal) var(--easing-out),
+    border-color     var(--transition-normal) var(--easing-out),
+    transform        var(--transition-bounce),
+    box-shadow       var(--transition-normal) var(--easing-out);
+}
+
+.timeline__item:hover .timeline__dot {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-accent);
+}
+
+/* Ícono dentro del punto */
+.timeline__dot-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: transform var(--transition-bounce);
+}
+
+.timeline__item:hover .timeline__dot-icon {
+  transform: scale(1.2) rotate(-10deg);
+}
+
+/* Aro pulsante alrededor del punto activo */
+.timeline__dot--active::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: var(--radius-full);
+  border: var(--border-width-thin) solid var(--color-accent-border);
+  animation: pulse-glow 2.5s var(--easing-smooth) infinite;
+}
+
+/* -------------------------------------------------------------
+   6. CARD DEL TIMELINE
+------------------------------------------------------------- */
+.timeline__card {
+  background-color: var(--color-surface);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8);
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color var(--transition-normal) var(--easing-out),
+    box-shadow   var(--transition-normal) var(--easing-out),
+    transform    var(--transition-bounce);
+}
+
+.timeline__item:hover .timeline__card {
+  border-color: var(--color-accent-border);
+  box-shadow: var(--shadow-lg);
+  transform: translateX(var(--space-2));
+}
+
+/* Línea acento top */
+.timeline__card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-accent-2)
+  );
+  opacity: 0;
+  transition: opacity var(--transition-normal) var(--easing-out);
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+}
+
+.timeline__item:hover .timeline__card::before {
+  opacity: 1;
+}
+
+/* Fondo decorativo esquina */
+.timeline__card::after {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-full);
+  background: radial-gradient(
+    circle,
+    var(--color-accent-subtle) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-normal) var(--easing-out);
+}
+
+.timeline__item:hover .timeline__card::after {
+  opacity: 1;
+}
+
+/* -------------------------------------------------------------
+   7. HEADER DE LA CARD
+------------------------------------------------------------- */
+.timeline__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+
+.timeline__institution {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.timeline__degree {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-accent);
+  letter-spacing: var(--letter-spacing-wide);
+  margin-top: var(--space-1);
+}
+
+.timeline__period {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.timeline__period::before {
+  content: '';
+  width: 1rem;
+  height: var(--border-width-thin);
+  background-color: var(--color-border-strong);
+  display: inline-block;
+}
+
+/* -------------------------------------------------------------
+   8. CURSOS RELEVANTES
+------------------------------------------------------------- */
+.timeline__courses-label {
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+  display: block;
+}
+
+.timeline__courses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* -------------------------------------------------------------
+   9. BARRA DE PROGRESO DE CARRERA
+      Muestra visualmente el avance en la carrera
+------------------------------------------------------------- */
+.timeline__progress {
+  margin-top: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.timeline__progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.timeline__progress-label {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.timeline__progress-value {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+}
+
+.timeline__progress-bar {
+  height: 4px;
+  background-color: var(--color-border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.timeline__progress-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-accent-2)
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s var(--easing-spring) 0.3s;
+}
+
+/* El JS agrega .is-visible cuando entra al viewport */
+.timeline__item.is-visible .timeline__progress-fill {
+  transform: scaleX(var(--progress, 0.5));
+}
+
+/* -------------------------------------------------------------
+   10. LOGROS — Lista de highlights dentro de la card
+------------------------------------------------------------- */
+.timeline__achievements {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: var(--border-width-thin) solid var(--color-border-subtle);
+}
+
+.timeline__achievement {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+/* Check decorativo */
+.timeline__achievement::before {
+  content: '✓';
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent-subtle);
+  border: var(--border-width-thin) solid var(--color-accent-border);
+  color: var(--color-accent);
+  font-size: 0.65rem;
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+/* -------------------------------------------------------------
+   11. CONECTOR ENTRE ITEMS — Flecha que une cards
+------------------------------------------------------------- */
+.timeline__connector {
+  position: absolute;
+  left: calc(1.75rem - 5px);
+  bottom: 0;
+  height: var(--space-10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  z-index: var(--z-raised);
+}
+
+.timeline__connector-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent-border);
+  animation: pulse-glow 1.5s var(--easing-smooth) infinite;
+}
+
+.timeline__connector-dot:nth-child(2) { animation-delay: 0.2s; }
+.timeline__connector-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* -------------------------------------------------------------
+   12. MODO OSCURO
+------------------------------------------------------------- */
+[data-theme="dark"] .timeline__dot {
+  background-color: var(--color-surface);
+}
+
+[data-theme="dark"] .timeline__item:hover .timeline__dot {
+  background-color: var(--color-accent);
+}
+
+[data-theme="dark"] .timeline__card {
+  background-color: var(--color-surface);
+}

@@ -1,0 +1,242 @@
+
+
+/* -------------------------------------------------------------
+   1. SECCIÓN BASE
+------------------------------------------------------------- */
+.contact-quick {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fondo decorativo — gradiente sutil */
+.contact-quick::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 60% 50% at 20% 50%,
+      var(--color-accent-subtle) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 40% 60% at 80% 50%,
+      var(--color-accent-2-subtle) 0%,
+      transparent 70%
+    );
+  pointer-events: none;
+  z-index: var(--z-below);
+}
+
+/* -------------------------------------------------------------
+   2. GRID DE TARJETAS
+------------------------------------------------------------- */
+.contact-quick__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  max-width: var(--container-lg);
+  margin-inline: auto;
+  position: relative;
+  z-index: var(--z-base);
+}
+
+/* -------------------------------------------------------------
+   3. ESTADO HOVER DEL GRID — Dimea las no-hovered
+------------------------------------------------------------- */
+.contact-quick__grid:has(.contact-card:hover) .contact-card:not(:hover) {
+  opacity: 0.6;
+  transform: scale(0.98);
+}
+
+/* -------------------------------------------------------------
+   4. SEPARADOR DECORATIVO — Entre hero y contacto
+------------------------------------------------------------- */
+.contact-quick__divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-10);
+  max-width: var(--container-lg);
+  margin-inline: auto;
+}
+
+.contact-quick__divider::before,
+.contact-quick__divider::after {
+  content: '';
+  flex: 1;
+  height: var(--border-width-thin);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-border),
+    transparent
+  );
+}
+
+.contact-quick__divider-text {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------------------
+   5. BANNER DE DISPONIBILIDAD
+      Franja superior opcional sobre el grid
+------------------------------------------------------------- */
+.contact-quick__banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-6);
+  background-color: rgba(34, 197, 94, 0.06);
+  border: var(--border-width-thin) solid rgba(34, 197, 94, 0.2);
+  border-radius: var(--radius-full);
+  max-width: fit-content;
+  margin-inline: auto;
+  margin-bottom: var(--space-10);
+}
+
+.contact-quick__banner-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-success);
+  flex-shrink: 0;
+  animation: pulse-glow 2s var(--easing-smooth) infinite;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
+}
+
+.contact-quick__banner-text {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-success);
+}
+
+/* -------------------------------------------------------------
+   6. SECCIÓN FOOTER DE CONTACTO
+      CTA final debajo del grid
+------------------------------------------------------------- */
+.contact-quick__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-10);
+  text-align: center;
+}
+
+.contact-quick__footer-text {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  max-width: 40ch;
+}
+
+/* -------------------------------------------------------------
+   7. CARD HIGHLIGHT — Efecto especial para la
+      tarjeta de contacto preferida (LinkedIn/Email)
+------------------------------------------------------------- */
+.contact-card--featured {
+  border-color: var(--color-accent-border);
+  background-color: var(--color-accent-subtle);
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-card--featured .contact-card__label {
+  color: var(--color-accent);
+}
+
+.contact-card--featured::before {
+  opacity: 1;
+}
+
+.contact-card--featured:hover {
+  box-shadow: var(--shadow-accent);
+  transform: translateY(-6px);
+}
+
+/* -------------------------------------------------------------
+   8. COUNTER STRIP — Franja de estadísticas rápidas
+      Opcional entre hero y contacto
+------------------------------------------------------------- */
+.counter-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding-block: var(--space-8);
+  border-top: var(--border-width-thin) solid var(--color-border);
+  border-bottom: var(--border-width-thin) solid var(--color-border);
+  background-color: var(--color-surface);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.counter-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.counter-strip__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding-inline: var(--space-10);
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Separador vertical entre items */
+.counter-strip__item + .counter-strip__item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 15%;
+  height: 70%;
+  width: var(--border-width-thin);
+  background-color: var(--color-border);
+}
+
+.counter-strip__number {
+  font-family: var(--font-display);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+  line-height: 1;
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.counter-strip__suffix {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.counter-strip__label {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* -------------------------------------------------------------
+   9. MODO OSCURO — Ajustes
+------------------------------------------------------------- */
+[data-theme="dark"] .contact-quick::before {
+  opacity: 0.5;
+}
+
+[data-theme="dark"] .counter-strip {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}

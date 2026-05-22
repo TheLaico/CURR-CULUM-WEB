@@ -1,0 +1,418 @@
+
+/* -------------------------------------------------------------
+   1. SECCIÓN BASE
+------------------------------------------------------------- */
+.projects {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fondo decorativo — gradiente esquina */
+.projects::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse 80% 60% at 100% 30%,
+    var(--color-accent-subtle) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: var(--z-below);
+}
+
+.projects::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40%;
+  height: 50%;
+  background: radial-gradient(
+    ellipse 80% 60% at 0% 100%,
+    var(--color-accent-2-subtle) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: var(--z-below);
+}
+
+[data-theme="dark"] .projects::before,
+[data-theme="dark"] .projects::after {
+  opacity: 0.5;
+}
+
+/* -------------------------------------------------------------
+   2. FILTROS — Tabs para filtrar por tecnología
+------------------------------------------------------------- */
+.projects__filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-10);
+  position: relative;
+  z-index: var(--z-base);
+}
+
+.projects__filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background-color: transparent;
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition:
+    color            var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color     var(--transition-fast),
+    transform        var(--transition-bounce);
+}
+
+.projects__filter-btn:hover {
+  color: var(--color-text-primary);
+  border-color: var(--color-border-strong);
+  background-color: var(--color-surface-alt);
+  transform: translateY(-1px);
+}
+
+/* Estado activo */
+.projects__filter-btn.is-active {
+  color: var(--color-accent);
+  background-color: var(--color-accent-subtle);
+  border-color: var(--color-accent-border);
+}
+
+/* Contador de proyectos por filtro */
+.projects__filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  padding-inline: 3px;
+  font-size: 0.6rem;
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-full);
+  background-color: var(--color-border);
+  color: var(--color-text-muted);
+  line-height: 1;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.projects__filter-btn.is-active .projects__filter-count {
+  background-color: var(--color-accent);
+  color: #0F0E0D;
+}
+
+/* -------------------------------------------------------------
+   3. GRID DE PROYECTOS — Lista vertical de cards horizontales
+------------------------------------------------------------- */
+.projects__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  position: relative;
+  z-index: var(--z-base);
+}
+
+/* -------------------------------------------------------------
+   4. ANIMACIÓN DE FILTRADO
+      El JS agrega/quita .is-hidden para filtrar proyectos
+------------------------------------------------------------- */
+.project-card {
+  transition:
+    opacity    var(--transition-normal) var(--easing-out),
+    transform  var(--transition-normal) var(--easing-out),
+    border-color var(--transition-normal) var(--easing-out),
+    box-shadow   var(--transition-normal) var(--easing-out);
+}
+
+.project-card.is-hidden {
+  opacity: 0;
+  transform: scale(0.95) translateY(var(--space-4));
+  pointer-events: none;
+  position: absolute;
+  visibility: hidden;
+}
+
+.project-card.is-entering {
+  animation: fade-up var(--transition-slow) var(--easing-spring) both;
+}
+
+/* -------------------------------------------------------------
+   5. NÚMERO DE PROYECTO — Decorativo
+------------------------------------------------------------- */
+.project-card__number {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+/* -------------------------------------------------------------
+   6. IMAGEN DEL PROYECTO — Contenedor con overlay
+------------------------------------------------------------- */
+.project-card__image-wrapper {
+  position: relative;
+  width: 280px;
+  min-width: 280px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Overlay oscuro al hacer hover */
+.project-card__image-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 194, 168, 0.15) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-normal) var(--easing-out);
+}
+
+.project-card:hover .project-card__image-wrapper::after {
+  opacity: 1;
+}
+
+/* Ícono de preview al centro del overlay */
+.project-card__preview-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent);
+  color: #0F0E0D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  z-index: var(--z-raised);
+  transition:
+    opacity   var(--transition-normal) var(--easing-out),
+    transform var(--transition-bounce);
+  box-shadow: var(--shadow-accent);
+}
+
+.project-card:hover .project-card__preview-icon {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* -------------------------------------------------------------
+   7. BODY DEL PROYECTO — Contenido de texto
+------------------------------------------------------------- */
+.project-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-8);
+  flex: 1;
+  min-width: 0;
+}
+
+.project-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.project-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
+  min-width: 0;
+}
+
+.project-card__title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.project-card:hover .project-card__title {
+  color: var(--color-accent);
+}
+
+.project-card__description {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* -------------------------------------------------------------
+   8. STACK DE TECNOLOGÍAS DEL PROYECTO
+------------------------------------------------------------- */
+.project-card__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+/* -------------------------------------------------------------
+   9. BOTONES DE ACCIÓN — Demo + GitHub
+------------------------------------------------------------- */
+.project-card__buttons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: var(--border-width-thin) solid var(--color-border-subtle);
+}
+
+/* -------------------------------------------------------------
+   10. PROYECTO DESTACADO — Card con estilo especial
+       Uso: class="project-card project-card--featured"
+------------------------------------------------------------- */
+.project-card--featured {
+  border-color: var(--color-accent-border);
+  background: linear-gradient(
+    135deg,
+    var(--color-surface) 0%,
+    var(--color-accent-subtle) 100%
+  );
+}
+
+.project-card--featured::before {
+  opacity: 1;
+}
+
+.project-card--featured .project-card__number::before {
+  content: '★ ';
+  color: var(--color-accent);
+}
+
+/* -------------------------------------------------------------
+   11. EMPTY STATE — Sin proyectos que mostrar
+------------------------------------------------------------- */
+.projects__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-20);
+  text-align: center;
+  color: var(--color-text-muted);
+  border: var(--border-width-thin) dashed var(--color-border);
+  border-radius: var(--radius-2xl);
+}
+
+.projects__empty-icon {
+  font-size: 3rem;
+  opacity: 0.5;
+}
+
+.projects__empty-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+}
+
+/* -------------------------------------------------------------
+   12. SKELETON — Mientras el JS renderiza las cards
+------------------------------------------------------------- */
+.project-card--skeleton {
+  pointer-events: none;
+  min-height: 220px;
+}
+
+.project-card--skeleton .project-card__image-wrapper {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-alt) 25%,
+    var(--color-border-subtle) 50%,
+    var(--color-surface-alt) 75%
+  );
+  background-size: 200% auto;
+  animation: shimmer 1.6s linear infinite;
+}
+
+.project-card--skeleton .project-card__title,
+.project-card--skeleton .project-card__description,
+.project-card--skeleton .project-card__number {
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-alt) 25%,
+    var(--color-border-subtle) 50%,
+    var(--color-surface-alt) 75%
+  );
+  background-size: 200% auto;
+  animation: shimmer 1.6s linear infinite;
+  color: transparent;
+  user-select: none;
+}
+
+.project-card--skeleton .project-card__description {
+  animation-delay: 0.2s;
+  -webkit-line-clamp: unset;
+  height: 4rem;
+}
+
+.project-card--skeleton .project-card__number {
+  animation-delay: 0.1s;
+  width: 4rem;
+}
+
+/* -------------------------------------------------------------
+   13. CTA FINAL — Ver más proyectos en GitHub
+------------------------------------------------------------- */
+.projects__cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-12);
+  padding-top: var(--space-10);
+  border-top: var(--border-width-thin) solid var(--color-border);
+  text-align: center;
+}
+
+.projects__cta-text {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  max-width: 40ch;
+}

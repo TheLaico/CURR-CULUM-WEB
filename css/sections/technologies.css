@@ -1,0 +1,338 @@
+
+
+/* -------------------------------------------------------------
+   1. SECCIÓN BASE
+------------------------------------------------------------- */
+.technologies {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fondo decorativo — puntos en grid */
+.technologies::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    var(--color-border) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: var(--z-below);
+  mask-image: radial-gradient(
+    ellipse 80% 80% at 50% 50%,
+    black 0%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 80% 80% at 50% 50%,
+    black 0%,
+    transparent 100%
+  );
+}
+
+[data-theme="dark"] .technologies::before {
+  opacity: 0.25;
+}
+
+/* -------------------------------------------------------------
+   2. GRID PRINCIPAL DE TECNOLOGÍAS
+      Renderizado por JS desde data/technologies.js
+------------------------------------------------------------- */
+.technologies__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-10);
+  position: relative;
+  z-index: var(--z-base);
+}
+
+/* Hover en el grid — dimea las no-hovered */
+.technologies__grid:has(.tech-card:hover) .tech-card:not(:hover) {
+  opacity: 0.5;
+  transform: scale(0.97);
+  transition:
+    opacity  var(--transition-normal) var(--easing-out),
+    transform var(--transition-normal) var(--easing-out);
+}
+
+/* -------------------------------------------------------------
+   3. CATEGORÍAS — Separar tecnologías por grupo
+      Uso: <div class="tech-category">
+             <p class="tech-category__title">Frontend</p>
+             <div class="technologies__grid">...</div>
+           </div>
+------------------------------------------------------------- */
+.tech-category {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-bottom: var(--space-10);
+}
+
+.tech-category__title {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Línea decorativa junto al título */
+.tech-category__title::after {
+  content: '';
+  flex: 1;
+  height: var(--border-width-thin);
+  background: linear-gradient(
+    90deg,
+    var(--color-border),
+    transparent
+  );
+}
+
+/* -------------------------------------------------------------
+   4. BARRA DE NIVEL — Skill bar dentro de tech-card
+      Opcional: muestra nivel de dominio visualmente
+------------------------------------------------------------- */
+.tech-card__bar-wrapper {
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+  z-index: var(--z-raised);
+}
+
+.tech-card__bar {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-accent-2)
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.8s var(--easing-spring) 0.2s;
+}
+
+/* El JS agrega .is-visible cuando la card entra al viewport */
+.tech-card.is-visible .tech-card__bar {
+  transform: scaleX(var(--skill-level, 0.8));
+}
+
+/* -------------------------------------------------------------
+   5. SECCIÓN "ACTUALMENTE APRENDIENDO"
+------------------------------------------------------------- */
+.technologies__learning {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-5) var(--space-6);
+  background-color: var(--color-surface);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-xl);
+  border-left: 3px solid var(--color-accent);
+  position: relative;
+  z-index: var(--z-base);
+  flex-wrap: wrap;
+}
+
+/* Ícono decorativo */
+.technologies__learning-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  animation: bounce-subtle 2s var(--easing-smooth) infinite;
+}
+
+/* Texto label */
+.technologies__learning .text-label {
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+}
+
+/* Contenedor de badges */
+.technologies__learning-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+/* Separador vertical */
+.technologies__learning-sep {
+  width: var(--border-width-thin);
+  height: 1.5rem;
+  background-color: var(--color-border);
+  flex-shrink: 0;
+}
+
+/* -------------------------------------------------------------
+   6. MARQUEE — Carrusel infinito de logos
+      Alternativa visual al grid para secciones secundarias
+      Uso: <div class="tech-marquee">
+             <div class="tech-marquee__track">
+               <!-- badges duplicados para loop infinito -->
+             </div>
+           </div>
+------------------------------------------------------------- */
+.tech-marquee {
+  overflow: hidden;
+  position: relative;
+  padding-block: var(--space-4);
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+}
+
+.tech-marquee__track {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+.tech-marquee:hover .tech-marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* -------------------------------------------------------------
+   7. TOOLTIP DE TECNOLOGÍA — Al hacer hover en la tech-card
+      El JS agrega el tooltip dinámicamente
+------------------------------------------------------------- */
+.tech-tooltip {
+  position: absolute;
+  bottom: calc(100% + var(--space-2));
+  left: 50%;
+  transform: translateX(-50%) translateY(var(--space-2));
+  background-color: var(--color-text-primary);
+  color: var(--color-bg);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-md);
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    opacity   var(--transition-fast),
+    transform var(--transition-normal) var(--easing-spring);
+  z-index: var(--z-dropdown);
+  box-shadow: var(--shadow-md);
+}
+
+/* Flechita */
+.tech-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--color-text-primary);
+}
+
+.tech-card:hover .tech-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+[data-theme="dark"] .tech-tooltip {
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  border: var(--border-width-thin) solid var(--color-border);
+}
+
+[data-theme="dark"] .tech-tooltip::after {
+  border-top-color: var(--color-surface);
+}
+
+/* -------------------------------------------------------------
+   8. EMPTY STATE — Mientras el JS carga las tarjetas
+------------------------------------------------------------- */
+.technologies__empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-16);
+  color: var(--color-text-muted);
+}
+
+/* Skeleton loaders mientras carga el JS */
+.tech-card--skeleton {
+  pointer-events: none;
+}
+
+.tech-card--skeleton .tech-card__icon,
+.tech-card--skeleton .tech-card__name,
+.tech-card--skeleton .tech-card__level {
+  border-radius: var(--radius-md);
+}
+
+.tech-card--skeleton .tech-card__icon {
+  width: 3rem;
+  height: 3rem;
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-alt) 25%,
+    var(--color-border-subtle) 50%,
+    var(--color-surface-alt) 75%
+  );
+  background-size: 200% auto;
+  animation: shimmer 1.6s linear infinite;
+}
+
+.tech-card--skeleton .tech-card__name {
+  width: 4rem;
+  height: 0.75rem;
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-alt) 25%,
+    var(--color-border-subtle) 50%,
+    var(--color-surface-alt) 75%
+  );
+  background-size: 200% auto;
+  animation: shimmer 1.6s linear infinite 0.2s;
+}
+
+.tech-card--skeleton .tech-card__level {
+  width: 3rem;
+  height: 0.5rem;
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-alt) 25%,
+    var(--color-border-subtle) 50%,
+    var(--color-surface-alt) 75%
+  );
+  background-size: 200% auto;
+  animation: shimmer 1.6s linear infinite 0.4s;
+}

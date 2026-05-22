@@ -1,0 +1,323 @@
+
+/* -------------------------------------------------------------
+   1. SECCIÓN BASE
+------------------------------------------------------------- */
+.hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: var(--navbar-height);
+}
+
+/* -------------------------------------------------------------
+   2. CONTAINER — Layout de dos columnas
+------------------------------------------------------------- */
+.hero__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  width: 100%;
+  padding-block: var(--space-16);
+}
+
+/* -------------------------------------------------------------
+   3. COLUMNA IZQUIERDA — Contenido
+------------------------------------------------------------- */
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-6);
+  flex: 1;
+  max-width: 600px;
+  position: relative;
+  z-index: var(--z-raised);
+}
+
+/* Label superior "Disponible para trabajo" */
+.hero__content .text-label-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-accent-subtle);
+  border: var(--border-width-thin) solid var(--color-accent-border);
+  border-radius: var(--radius-full);
+}
+
+.hero__content .text-label-accent::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent);
+  flex-shrink: 0;
+  animation: pulse-glow 2s var(--easing-smooth) infinite;
+}
+
+/* Nombre principal */
+.hero__content .heading-display {
+  margin: 0;
+  line-height: 1.05;
+}
+
+/* Descripción */
+.hero__description {
+  max-width: 46ch;
+  margin: 0;
+}
+
+/* -------------------------------------------------------------
+   4. STACK DE TECNOLOGÍAS — Fila de badges
+------------------------------------------------------------- */
+.hero__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+/* Separador decorativo antes del stack */
+.hero__stack::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: var(--border-width-thin);
+  background: linear-gradient(
+    90deg,
+    var(--color-accent-border),
+    transparent
+  );
+  margin-bottom: var(--space-2);
+}
+
+/* -------------------------------------------------------------
+   5. BOTONES CTA
+------------------------------------------------------------- */
+.hero__buttons {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+/* -------------------------------------------------------------
+   6. COLUMNA DERECHA — Foto
+------------------------------------------------------------- */
+.hero__image-wrapper {
+  position: relative;
+  width: 340px;
+  height: 340px;
+  flex-shrink: 0;
+  z-index: var(--z-raised);
+}
+
+/* Imagen circular */
+.hero__image {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  object-position: center top;
+  position: relative;
+  z-index: var(--z-raised);
+  border: 3px solid var(--color-border);
+  transition: border-color var(--transition-normal) var(--easing-out);
+}
+
+.hero__image-wrapper:hover .hero__image {
+  border-color: var(--color-accent-border);
+}
+
+/* Aro decorativo giratorio */
+.hero__image-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: var(--radius-full);
+  border: var(--border-width-normal) solid transparent;
+  background:
+    linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+    linear-gradient(
+      135deg,
+      var(--color-accent),
+      transparent 40%,
+      transparent 60%,
+      var(--color-accent-2)
+    ) border-box;
+  animation: spin 8s linear infinite;
+}
+
+/* Segundo aro — contrarrotación */
+.hero__image-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -16px;
+  border-radius: var(--radius-full);
+  border: var(--border-width-thin) solid transparent;
+  background:
+    linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+    linear-gradient(
+      225deg,
+      var(--color-accent-2),
+      transparent 40%,
+      transparent 60%,
+      var(--color-accent)
+    ) border-box;
+  animation: spin 12s linear infinite reverse;
+  opacity: 0.5;
+}
+
+/* Brillo detrás de la foto */
+.hero__image-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  border-radius: var(--radius-full);
+  background: radial-gradient(
+    circle,
+    var(--color-accent-subtle) 0%,
+    transparent 70%
+  );
+  z-index: var(--z-below);
+  animation: pulse-glow 3s var(--easing-smooth) infinite;
+}
+
+/* -------------------------------------------------------------
+   7. BADGE FLOTANTE "Disponible"
+      Estilos base en badge.css,
+      aquí solo la posición relativa a la foto
+------------------------------------------------------------- */
+.hero__badge {
+  position: absolute;
+  bottom: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: calc(var(--z-raised) + 1);
+}
+
+/* -------------------------------------------------------------
+   8. INDICADOR DE SCROLL
+------------------------------------------------------------- */
+.hero__scroll-hint {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  z-index: var(--z-raised);
+}
+
+.hero__scroll-hint:hover {
+  color: var(--color-accent);
+}
+
+.hero__scroll-hint svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke: currentColor;
+}
+
+/* Línea animada de scroll */
+.hero__scroll-hint::before {
+  content: '';
+  width: 1px;
+  height: 2.5rem;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--color-accent)
+  );
+  animation: scroll-line 1.8s var(--easing-out) infinite;
+}
+
+@keyframes scroll-line {
+  0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
+  50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+}
+
+/* -------------------------------------------------------------
+   9. TYPEWRITER — Contenedor en el hero
+      Estilos base en typography.css,
+      aquí solo ajustes de posición en el hero
+------------------------------------------------------------- */
+.hero__content .typewriter-wrapper {
+  min-height: 2.5rem;
+  margin-block: calc(var(--space-2) * -1);
+}
+
+/* -------------------------------------------------------------
+   10. DECORACIÓN — Código flotante de fondo
+       Elementos decorativos con etiquetas HTML/CSS
+       puramente estéticos
+------------------------------------------------------------- */
+.hero__code-tag {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-accent);
+  opacity: 0.15;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: var(--z-below);
+  animation: float 6s var(--easing-smooth) infinite;
+}
+
+.hero__code-tag--1 {
+  top: 15%;
+  right: 5%;
+  animation-delay: 0s;
+  font-size: var(--font-size-sm);
+}
+
+.hero__code-tag--2 {
+  bottom: 25%;
+  right: 8%;
+  animation-delay: -2s;
+}
+
+.hero__code-tag--3 {
+  top: 60%;
+  left: 2%;
+  animation-delay: -4s;
+}
+
+[data-theme="dark"] .hero__code-tag {
+  opacity: 0.2;
+}
+
+/* -------------------------------------------------------------
+   11. ABOUT CONTAINER — Layout de la sección Sobre mí
+       Va aquí porque comparte estructura de dos columnas
+       con el hero
+------------------------------------------------------------- */
+.about__container {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-16);
+}
+
+.about__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 55ch;
+}
