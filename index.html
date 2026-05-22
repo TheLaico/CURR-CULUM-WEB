@@ -1,1 +1,502 @@
-<link rel="stylesheet" href="css/main.css">
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+
+<head>
+    <!-- __________________________________________________________________
+       META — Configuración base del documento
+  __________________________________________________________________= -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Nicolas Vargas Alvarez — Frontend Developer. Desarrollador enfocado en crear interfaces modernas, responsivas y experiencias web limpias." />
+    <meta name="author" content="Nicolas Vargas Alvarez" />
+    <meta name="theme-color" content="#00C2A8" />
+
+    <!-- Open Graph — para cuando compartas el link -->
+    <meta property="og:title" content="Nicolas Vargas — Frontend Developer" />
+    <meta property="og:description" content="Interfaces modernas, responsivas y experiencias web limpias." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/images/profile/og-image.jpg" />
+
+    <title>Nicolas Vargas Alvarez — Frontend Developer</title>
+
+    <!-- __________________________________________________________________
+       FUENTES — Google Fonts (preconnect primero = más rápido)
+  __________________________________________________________________= -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+
+    <!-- __________________________________________________________________
+       CSS — Un solo punto de entrada
+  __________________________________________________________________= -->
+    <link rel="stylesheet" href="css/main.css" />
+
+    <!-- Previene flash de tema incorrecto al cargar -->
+    <script>
+        const saved = localStorage.getItem('theme');
+        const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', saved || preferred);
+    </script>
+</head>
+
+<body>
+
+    <!-- __________________________________________________________________
+       NAVBAR
+  __________________________________________________________________= -->
+    <header class="navbar" id="navbar" role="banner">
+        <div class="container navbar__container">
+
+            <!-- Logo / Nombre -->
+            <a href="#inicio" class="navbar__logo" aria-label="Ir al inicio">
+                <span class="navbar__logo-name">Nicolas Vargas</span>
+                <span class="navbar__logo-dot"></span>
+            </a>
+
+            <!-- Navegación principal -->
+            <nav class="navbar__links" id="navLinks" role="navigation" aria-label="Navegación principal">
+                <a href="#inicio" class="navbar__link" data-nav="inicio">Inicio</a>
+                <a href="#tecnologias" class="navbar__link" data-nav="tecnologias">Tecnologías</a>
+                <a href="#proyectos" class="navbar__link" data-nav="proyectos">Proyectos</a>
+                <a href="#sobre-mi" class="navbar__link" data-nav="sobre-mi">Sobre mí</a>
+                <a href="#contacto" class="navbar__link" data-nav="contacto">Contacto</a>
+            </nav>
+
+            <!-- Acciones derecha -->
+            <div class="navbar__actions">
+                <!-- Botón modo oscuro/claro -->
+                <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema"
+                    title="Cambiar tema claro/oscuro">
+                    <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">
+                        <!-- Sol -->
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5" />
+                            <line x1="12" y1="1" x2="12" y2="3" />
+                            <line x1="12" y1="21" x2="12" y2="23" />
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                            <line x1="1" y1="12" x2="3" y2="12" />
+                            <line x1="21" y1="12" x2="23" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                        </svg>
+                    </span>
+                    <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">
+                        <!-- Luna -->
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                        </svg>
+                    </span>
+                </button>
+
+                <!-- Hamburguesa — solo visible en móvil -->
+                <button class="navbar__hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false"
+                    aria-controls="navLinks">
+                    <span class="navbar__hamburger-line"></span>
+                    <span class="navbar__hamburger-line"></span>
+                    <span class="navbar__hamburger-line"></span>
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- __________________________________________________________________
+       MAIN — Contenido principal
+  __________________________________________________________________= -->
+    <main id="main-content">
+
+        <!-- __________________________________________________________________
+         1. HERO
+    __________________________________________________________________ -->
+        <section class="hero section" id="inicio" aria-label="Presentación">
+
+            <!-- Fondo decorativo -->
+            <div class="hero__grid" aria-hidden="true"></div>
+            <div class="hero__orb hero__orb--1" aria-hidden="true"></div>
+            <div class="hero__orb hero__orb--2" aria-hidden="true"></div>
+            <div class="hero__orb hero__orb--3" aria-hidden="true"></div>
+            <canvas class="particles-canvas" id="particlesCanvas" aria-hidden="true"></canvas>
+
+            <div class="container hero__container">
+
+                <!-- Columna izquierda — Texto -->
+                <div class="hero__content">
+
+                    <p class="text-label-accent animate-fade-down delay-1">
+                        Disponible para trabajo junior
+                    </p>
+
+                    <h1 class="heading-display text-gradient animate-fade-up delay-2">
+                        Nicolas Vargas<br>Alvarez
+                    </h1>
+
+                    <!-- Typewriter -->
+                    <div class="typewriter-wrapper animate-fade-up delay-3" aria-live="polite">
+                        <span class="typewriter-text" id="typewriterText"></span>
+                        <span class="typewriter-cursor" aria-hidden="true"></span>
+                    </div>
+
+                    <p class="text-lead hero__description animate-fade-up delay-4">
+                        Desarrollador enfocado en crear interfaces modernas,
+                        responsivas y experiencias web limpias.
+                    </p>
+
+                    <!-- Stack de tecnologías -->
+                    <div class="hero__stack animate-fade-up delay-5" aria-label="Tecnologías principales">
+                        <span class="badge badge--tech">React</span>
+                        <span class="badge badge--tech">JavaScript</span>
+                        <span class="badge badge--tech">Angular</span>
+                        <span class="badge badge--tech">Tailwind</span>
+                    </div>
+
+                    <!-- Botones CTA -->
+                    <div class="hero__buttons animate-fade-up delay-6">
+                        <a href="#proyectos" class="btn btn--primary">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" aria-hidden="true">
+                                <rect x="2" y="3" width="20" height="14" rx="2" />
+                                <line x1="8" y1="21" x2="16" y2="21" />
+                                <line x1="12" y1="17" x2="12" y2="21" />
+                            </svg>
+                            Ver proyectos
+                        </a>
+                        <a href="assets/cv-nicolas-vargas.pdf" class="btn btn--secondary" download
+                            aria-label="Descargar CV de Nicolas Vargas">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" aria-hidden="true">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            Descargar CV
+                        </a>
+                        <a href="#contacto" class="btn btn--ghost">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" aria-hidden="true">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
+                            Contáctame
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- Columna derecha — Foto -->
+                <div class="hero__image-wrapper animate-scale-in delay-4" aria-hidden="true">
+                    <div class="hero__image-ring"></div>
+                    <img src="assets/images/profile/nicolas-vargas.jpg"
+                        alt="Nicolas Vargas Alvarez — Frontend Developer" class="hero__image" width="400" height="400"
+                        loading="eager" />
+                    <!-- Badge flotante -->
+                    <div class="hero__badge animate-float" aria-label="Disponible para trabajar">
+                        <span class="hero__badge-dot" aria-hidden="true"></span>
+                        <span>Disponible</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Indicador de scroll -->
+            <div class="hero__scroll-hint animate-bounce" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9" />
+                </svg>
+            </div>
+
+        </section>
+
+
+        <!-- __________________________________________________________________
+         2. CONTACTO RÁPIDO
+    __________________________________________________________________ -->
+        <section class="contact-quick section--alt" id="contacto" aria-label="Contacto rápido">
+            <div class="container">
+
+                <div class="section-heading" style="align-items:center; text-align:center;">
+                    <p class="section-heading__label reveal">Hablemos</p>
+                    <h2 class="section-heading__title reveal delay-1">Contacto rápido</h2>
+                    <p class="section-heading__subtitle reveal delay-2">
+                        Estoy disponible para proyectos freelance, prácticas
+                        y trabajo junior en desarrollo frontend.
+                    </p>
+                </div>
+
+                <div class="contact-quick__grid reveal-group">
+
+                    <a href="mailto:nicolas@gmail.com" class="contact-card hover-lift"
+                        aria-label="Enviar correo a Nicolas">
+                        <span class="contact-card__icon" aria-hidden="true">📧</span>
+                        <span class="contact-card__label">Gmail</span>
+                        <span class="contact-card__value text-small">nicolas@gmail.com</span>
+                    </a>
+
+                    <a href="https://wa.me/573XXXXXXXXX" class="contact-card hover-lift" target="_blank"
+                        rel="noopener noreferrer" aria-label="Escribir por WhatsApp">
+                        <span class="contact-card__icon" aria-hidden="true">📱</span>
+                        <span class="contact-card__label">WhatsApp</span>
+                        <span class="contact-card__value text-small">+57 3XX XXX XXXX</span>
+                    </a>
+
+                    <a href="https://linkedin.com/in/nicolas-vargas" class="contact-card hover-lift" target="_blank"
+                        rel="noopener noreferrer" aria-label="Ver perfil de LinkedIn">
+                        <span class="contact-card__icon" aria-hidden="true">💼</span>
+                        <span class="contact-card__label">LinkedIn</span>
+                        <span class="contact-card__value text-small">/in/nicolas-vargas</span>
+                    </a>
+
+                    <a href="https://github.com/nicolas-vargas" class="contact-card hover-lift" target="_blank"
+                        rel="noopener noreferrer" aria-label="Ver perfil de GitHub">
+                        <span class="contact-card__icon" aria-hidden="true">🐙</span>
+                        <span class="contact-card__label">GitHub</span>
+                        <span class="contact-card__value text-small">/nicolas-vargas</span>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- __________________________________________________________________
+         3. TECNOLOGÍAS
+    __________________________________________________________________ -->
+        <section class="technologies section" id="tecnologias" aria-label="Tecnologías">
+            <div class="container">
+
+                <div class="section-heading">
+                    <p class="section-heading__label reveal">Stack</p>
+                    <h2 class="section-heading__title reveal delay-1">Tecnologías</h2>
+                    <p class="section-heading__subtitle reveal delay-2">
+                        Herramientas y lenguajes con los que construyo
+                        interfaces modernas día a día.
+                    </p>
+                </div>
+
+                <!-- Grid de tecnologías — renderizado por JS desde data/technologies.js -->
+                <div class="technologies__grid reveal-group" id="techGrid" aria-label="Lista de tecnologías">
+                    <!-- JS inserta las tarjetas aquí -->
+                </div>
+
+                <!-- Actualmente aprendiendo -->
+                <div class="technologies__learning reveal">
+                    <span class="text-label">Actualmente aprendiendo</span>
+                    <div class="technologies__learning-badges">
+                        <span class="badge badge--learning">
+                            <span aria-hidden="true">⚡</span> Vue.js
+                        </span>
+                        <span class="badge badge--learning">
+                            <span aria-hidden="true">🧪</span> Testing con Vitest
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- __________________________________________________________________
+         4. PROYECTOS
+    __________________________________________________________________ -->
+        <section class="projects section section--alt" id="proyectos" aria-label="Proyectos destacados">
+            <div class="container">
+
+                <div class="section-heading">
+                    <p class="section-heading__label reveal">Trabajo</p>
+                    <h2 class="section-heading__title reveal delay-1">Proyectos destacados</h2>
+                    <p class="section-heading__subtitle reveal delay-2">
+                        Una selección de los mejores proyectos que reflejan
+                        mis habilidades en desarrollo frontend.
+                    </p>
+                </div>
+
+                <!-- Grid de proyectos — renderizado por JS desde data/projects.js -->
+                <div class="projects__grid" id="projectsGrid" aria-label="Lista de proyectos">
+                    <!-- JS inserta las tarjetas aquí -->
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- __________________________________________________________________
+         5. SOBRE MÍ
+    __________________________________________________________________ -->
+        <section class="about section" id="sobre-mi" aria-label="Sobre mí">
+            <div class="container">
+
+                <div class="section-heading">
+                    <p class="section-heading__label reveal">Yo</p>
+                    <h2 class="section-heading__title reveal delay-1">Sobre mí</h2>
+                </div>
+
+                <div class="about__container">
+
+                    <!-- Texto -->
+                    <div class="about__text reveal--left">
+                        <p class="text-lead">
+                            Estudiante de Ingeniería de Sistemas y Computación
+                            en la Universidad de Caldas, con enfoque en
+                            desarrollo frontend.
+                        </p>
+                        <p class="text-body" style="margin-top: 1rem;">
+                            Me interesa crear aplicaciones web modernas, escalables
+                            y con buenas prácticas de diseño. Creo que el código
+                            limpio y la buena experiencia de usuario no son
+                            opuestos — son lo mismo.
+                        </p>
+                        <p class="text-body" style="margin-top: 1rem;">
+                            Actualmente en semestre 5, buscando mi primera
+                            experiencia profesional donde pueda aportar y
+                            seguir creciendo.
+                        </p>
+                    </div>
+
+                    <!-- Estadísticas -->
+                    <div class="about__stats reveal--right">
+
+                        <div class="stat-card">
+                            <span class="stat-card__number" data-count="10">0</span>
+                            <span class="stat-card__suffix">+</span>
+                            <span class="stat-card__label">Proyectos</span>
+                        </div>
+
+                        <div class="stat-card">
+                            <span class="stat-card__number" data-count="5">0</span>
+                            <span class="stat-card__suffix"></span>
+                            <span class="stat-card__label">Semestres</span>
+                        </div>
+
+                        <div class="stat-card">
+                            <span class="stat-card__number" data-count="8">0</span>
+                            <span class="stat-card__suffix">+</span>
+                            <span class="stat-card__label">Tecnologías</span>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- __________________________________________________________________
+         6. EDUCACIÓN
+    __________________________________________________________________ -->
+        <section class="education section section--alt" id="educacion" aria-label="Educación">
+            <div class="container">
+
+                <div class="section-heading">
+                    <p class="section-heading__label reveal">Formación</p>
+                    <h2 class="section-heading__title reveal delay-1">Educación</h2>
+                </div>
+
+                <div class="timeline">
+
+                    <!-- Línea vertical -->
+                    <div class="timeline__line" aria-hidden="true"></div>
+
+                    <!-- Item principal -->
+                    <article class="timeline__item reveal">
+                        <div class="timeline__dot" aria-hidden="true"></div>
+
+                        <div class="timeline__card">
+                            <div class="timeline__header">
+                                <div>
+                                    <h3 class="heading-4">Universidad de Caldas</h3>
+                                    <p class="text-label-accent" style="margin-top: 0.25rem;">
+                                        Ingeniería de Sistemas y Computación
+                                    </p>
+                                </div>
+                                <span class="badge badge--period">Semestre 5</span>
+                            </div>
+
+                            <p class="text-small" style="margin-top: 0.75rem; color: var(--color-text-muted);">
+                                2022 — Presente · Manizales, Colombia
+                            </p>
+
+                            <!-- Cursos relevantes -->
+                            <div class="timeline__courses-label text-label" style="margin-top: 1.25rem;">
+                                Cursos relevantes para frontend
+                            </div>
+                            <div class="timeline__courses reveal-group" style="margin-top: 0.75rem;">
+                                <span class="badge badge--course">Desarrollo Frontend</span>
+                                <span class="badge badge--course">Técnicas de Programación</span>
+                                <span class="badge badge--course">POO</span>
+                                <span class="badge badge--course">Estructuras de Datos</span>
+                                <span class="badge badge--course">Bases de Datos SQL</span>
+                                <span class="badge badge--course">Bases de Datos NoSQL</span>
+                                <span class="badge badge--course">Arquitectura de Computadores</span>
+                                <span class="badge badge--course">Matemática Discreta</span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- __________________________________________________________________
+       FOOTER
+  __________________________________________________________________= -->
+    <footer class="footer" role="contentinfo">
+        <div class="container footer__container">
+
+            <div class="footer__left">
+                <p class="footer__available">
+                    <span class="footer__available-dot" aria-hidden="true"></span>
+                    Disponible para trabajo junior frontend
+                </p>
+                <p class="text-small">Manizales, Colombia</p>
+            </div>
+
+            <div class="footer__right">
+                <div class="footer__socials" aria-label="Redes sociales">
+                    <a href="https://github.com/nicolas-vargas" target="_blank" rel="noopener noreferrer"
+                        class="footer__social-link" aria-label="GitHub de Nicolas Vargas">
+                        GitHub
+                    </a>
+                    <a href="https://linkedin.com/in/nicolas-vargas" target="_blank" rel="noopener noreferrer"
+                        class="footer__social-link" aria-label="LinkedIn de Nicolas Vargas">
+                        LinkedIn
+                    </a>
+                </div>
+                <p class="text-xs" style="margin-top: 0.5rem; text-align: right;">
+                    © 2025 Nicolas Vargas Alvarez
+                </p>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <!-- __________________________________________________________________
+       FAB — Botón flotante WhatsApp
+  __________________________________________________________________= -->
+    <a href="https://wa.me/573XXXXXXXXX" class="whatsapp-fab animate-pulse-glow" target="_blank"
+        rel="noopener noreferrer" aria-label="Contactar por WhatsApp" title="WhatsApp">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+        </svg>
+    </a>
+
+
+    <!-- __________________________________________________________________
+       SCRIPTS — Módulos JS en orden de dependencia
+       type="module" permite usar import/export entre archivos
+  __________________________________________________________________= -->
+    <script type="module" src="js/main.js"></script>
+
+</body>
+
+</html>
