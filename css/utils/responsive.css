@@ -1,0 +1,349 @@
+
+/* -------------------------------------------------------------
+   BREAKPOINTS DE REFERENCIA (no son variables CSS, son guía)
+
+   --bp-xs:  375px   → móvil pequeño (iPhone SE)
+   --bp-sm:  480px   → móvil grande
+   --bp-md:  768px   → tablet
+   --bp-lg:  1024px  → laptop
+   --bp-xl:  1280px  → desktop
+   --bp-2xl: 1440px  → pantalla grande
+------------------------------------------------------------- */
+
+/* -------------------------------------------------------------
+   1. NAVBAR
+------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .navbar__links {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: var(--color-bg);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-8);
+    z-index: var(--z-overlay);
+  }
+
+  .navbar__links.is-open {
+    display: flex;
+  }
+
+  .navbar__link {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .navbar__hamburger {
+    display: flex;
+  }
+
+  .navbar__actions {
+    gap: var(--space-3);
+  }
+}
+
+@media (min-width: 769px) {
+  .navbar__hamburger {
+    display: none;
+  }
+}
+
+/* -------------------------------------------------------------
+   2. HERO
+------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .hero__container {
+    gap: var(--space-12);
+  }
+
+  .hero__image-wrapper {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero__container {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: var(--space-8);
+    padding-top: calc(var(--navbar-height) + var(--space-8));
+  }
+
+  .hero__image-wrapper {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+  }
+
+  .hero__content {
+    align-items: center;
+  }
+
+  .hero__stack {
+    justify-content: center;
+  }
+
+  .hero__buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .hero__buttons .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero__scroll-hint {
+    display: none;
+  }
+}
+
+@media (max-width: 375px) {
+  .hero__image-wrapper {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+/* -------------------------------------------------------------
+   3. CONTACTO RÁPIDO
+------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .contact-quick__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+}
+
+@media (max-width: 375px) {
+  .contact-quick__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -------------------------------------------------------------
+   4. TECNOLOGÍAS
+------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .technologies__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .technologies__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+
+  .technologies__learning {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+}
+
+@media (max-width: 375px) {
+  .technologies__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2);
+  }
+}
+
+/* -------------------------------------------------------------
+   5. PROYECTOS
+------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .project-card {
+    flex-direction: column;
+  }
+
+  .project-card__image {
+    width: 100%;
+    height: 220px;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects__grid {
+    gap: var(--space-6);
+  }
+
+  .project-card__image {
+    height: 180px;
+  }
+
+  .project-card__body {
+    padding: var(--space-6);
+  }
+
+  .project-card__buttons {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .project-card__buttons .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* -------------------------------------------------------------
+   6. SOBRE MÍ
+------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .about__container {
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .about__stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .about__stats {
+    grid-template-columns: repeat(1, 1fr);
+    max-width: 280px;
+    margin: 0 auto;
+  }
+}
+
+/* -------------------------------------------------------------
+   7. EDUCACIÓN — Timeline
+------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .timeline__line {
+    left: var(--space-4);
+  }
+
+  .timeline__item {
+    padding-left: calc(var(--space-4) + var(--space-8));
+  }
+
+  .timeline__dot {
+    left: var(--space-4);
+    transform: translateX(-50%);
+  }
+
+  .timeline__courses {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -------------------------------------------------------------
+   8. FOOTER
+------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .footer__container {
+    flex-direction: column;
+    gap: var(--space-6);
+    text-align: center;
+  }
+
+  .footer__socials {
+    justify-content: center;
+  }
+}
+
+/* -------------------------------------------------------------
+   9. SECTION HEADINGS — Centrar en móvil
+------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .section-heading {
+    align-items: center;
+    text-align: center;
+  }
+
+  .section-heading__subtitle {
+    max-width: 100%;
+  }
+
+  .section-heading__label::before {
+    display: none;
+  }
+}
+
+/* -------------------------------------------------------------
+   10. UTILIDADES RESPONSIVE — Mostrar / ocultar
+------------------------------------------------------------- */
+
+/* Visible solo en móvil */
+.show-mobile {
+  display: none;
+}
+
+/* Oculto en móvil */
+.hide-mobile {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .show-mobile { display: block; }
+  .hide-mobile { display: none; }
+}
+
+/* -------------------------------------------------------------
+   11. ESPACIADO DE SECCIONES — Ajuste en móvil
+------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .section {
+    padding-block: var(--space-16);
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding-block: var(--space-12);
+  }
+}
+
+/* -------------------------------------------------------------
+   12. CONTAINER — Padding lateral en pantallas pequeñas
+------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .container {
+    padding-inline: var(--space-5);
+  }
+}
+
+@media (max-width: 375px) {
+  .container {
+    padding-inline: var(--space-4);
+  }
+}
+
+/* -------------------------------------------------------------
+   13. FAB WHATSAPP — Posición en móvil
+------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .whatsapp-fab {
+    bottom: var(--space-5);
+    right: var(--space-5);
+  }
+}
+
+/* -------------------------------------------------------------
+   14. TIPOGRAFÍA RESPONSIVE — Ajustes finos por breakpoint
+------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .heading-display {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+  }
+
+  .text-lead {
+    font-size: var(--font-size-base);
+  }
+
+  .typewriter-wrapper {
+    font-size: var(--font-size-lg);
+  }
+}

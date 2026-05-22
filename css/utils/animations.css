@@ -1,0 +1,304 @@
+
+/* -------------------------------------------------------------
+   1. KEYFRAMES BASE — Entradas
+------------------------------------------------------------- */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-left {
+  from {
+    opacity: 0;
+    transform: translateX(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-right {
+  from {
+    opacity: 0;
+    transform: translateX(-2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scale-up {
+  from {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* -------------------------------------------------------------
+   2. KEYFRAMES — Efectos continuos (loops)
+------------------------------------------------------------- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-0.75rem); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(0, 194, 168, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(0, 194, 168, 0.15);
+  }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  40%       { transform: translateY(-6px); }
+  60%       { transform: translateY(-3px); }
+}
+
+/* -------------------------------------------------------------
+   3. KEYFRAMES — Partículas y fondo hero
+------------------------------------------------------------- */
+@keyframes particle-drift {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% {
+    transform: translateY(-100vh) translateX(var(--drift-x, 20px)) scale(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* -------------------------------------------------------------
+   4. KEYFRAMES — Contador de estadísticas
+------------------------------------------------------------- */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(1rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* -------------------------------------------------------------
+   5. CLASES DE ANIMACIÓN — Entrada única (page load / scroll)
+      Uso: <div class="animate-fade-up">...</div>
+------------------------------------------------------------- */
+.animate-fade-in {
+  animation: fade-in var(--transition-slow) var(--easing-out) both;
+}
+
+.animate-fade-up {
+  animation: fade-up var(--transition-slow) var(--easing-out) both;
+}
+
+.animate-fade-down {
+  animation: fade-down var(--transition-slow) var(--easing-out) both;
+}
+
+.animate-fade-left {
+  animation: fade-left var(--transition-slow) var(--easing-out) both;
+}
+
+.animate-fade-right {
+  animation: fade-right var(--transition-slow) var(--easing-out) both;
+}
+
+.animate-scale-in {
+  animation: scale-in var(--transition-slow) var(--easing-spring) both;
+}
+
+.animate-scale-up {
+  animation: scale-up var(--transition-slow) var(--easing-spring) both;
+}
+
+/* -------------------------------------------------------------
+   6. CLASES DE ANIMACIÓN — Loops continuos
+------------------------------------------------------------- */
+.animate-float {
+  animation: float 4s var(--easing-smooth) infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.5s var(--easing-smooth) infinite;
+}
+
+.animate-spin {
+  animation: spin 1.2s linear infinite;
+}
+
+.animate-bounce {
+  animation: bounce-subtle 1.5s var(--easing-smooth) infinite;
+}
+
+/* -------------------------------------------------------------
+   7. DELAYS — Para animaciones escalonadas (stagger)
+      Uso: <div class="animate-fade-up delay-2">...</div>
+------------------------------------------------------------- */
+.delay-1  { animation-delay: 100ms; }
+.delay-2  { animation-delay: 200ms; }
+.delay-3  { animation-delay: 300ms; }
+.delay-4  { animation-delay: 400ms; }
+.delay-5  { animation-delay: 500ms; }
+.delay-6  { animation-delay: 600ms; }
+.delay-7  { animation-delay: 700ms; }
+.delay-8  { animation-delay: 800ms; }
+
+/* -------------------------------------------------------------
+   8. SCROLL REVEAL — Estado inicial para IntersectionObserver
+      El JS en scrollObserver.js añade .is-visible cuando
+      el elemento entra al viewport.
+
+      Uso: <div class="reveal">...</div>
+           <div class="reveal reveal--left">...</div>
+------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(2.5rem);
+  transition:
+    opacity var(--transition-slow) var(--easing-out),
+    transform var(--transition-slow) var(--easing-out);
+}
+
+.reveal--left {
+  opacity: 0;
+  transform: translateX(-2.5rem);
+  transition:
+    opacity var(--transition-slow) var(--easing-out),
+    transform var(--transition-slow) var(--easing-out);
+}
+
+.reveal--right {
+  opacity: 0;
+  transform: translateX(2.5rem);
+  transition:
+    opacity var(--transition-slow) var(--easing-out),
+    transform var(--transition-slow) var(--easing-out);
+}
+
+.reveal--scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition:
+    opacity var(--transition-slow) var(--easing-spring),
+    transform var(--transition-slow) var(--easing-spring);
+}
+
+/* Estado activo — el JS agrega esta clase */
+.reveal.is-visible,
+.reveal--left.is-visible,
+.reveal--right.is-visible,
+.reveal--scale.is-visible {
+  opacity: 1;
+  transform: translate(0) scale(1);
+}
+
+/* Stagger automático para hijos directos de un contenedor reveal */
+.reveal-group > *:nth-child(1) { transition-delay: 0ms; }
+.reveal-group > *:nth-child(2) { transition-delay: 100ms; }
+.reveal-group > *:nth-child(3) { transition-delay: 200ms; }
+.reveal-group > *:nth-child(4) { transition-delay: 300ms; }
+.reveal-group > *:nth-child(5) { transition-delay: 400ms; }
+.reveal-group > *:nth-child(6) { transition-delay: 500ms; }
+
+/* -------------------------------------------------------------
+   9. HOVER UTILITIES — Micro-interacciones reutilizables
+------------------------------------------------------------- */
+.hover-lift {
+  transition:
+    transform var(--transition-normal) var(--easing-spring),
+    box-shadow var(--transition-normal) var(--easing-out);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.hover-glow {
+  transition: box-shadow var(--transition-normal) var(--easing-out);
+}
+
+.hover-glow:hover {
+  box-shadow: var(--shadow-accent);
+}
+
+.hover-scale {
+  transition: transform var(--transition-normal) var(--easing-spring);
+}
+
+.hover-scale:hover {
+  transform: scale(1.04);
+}
+
+/* -------------------------------------------------------------
+   10. SHIMMER — Efecto skeleton / carga
+       Uso: <div class="shimmer">...</div>
+------------------------------------------------------------- */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-alt) 25%,
+    var(--color-border-subtle) 50%,
+    var(--color-surface-alt) 75%
+  );
+  background-size: 200% auto;
+  animation: shimmer 1.6s linear infinite;
+  border-radius: var(--radius-md);
+}
